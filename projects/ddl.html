@@ -65,10 +65,10 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
 
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
@@ -83,10 +83,10 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
 
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
@@ -101,10 +101,10 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
 
 document.getElementById("t_d_acl_abstract").innerHTML = day + " Day";
 document.getElementById("t_h_acl_abstract").innerHTML = hour + " Hour";
@@ -119,10 +119,10 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
 
 
 document.getElementById("t_d_acl_paper").innerHTML = day + " Day";
@@ -139,10 +139,11 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
@@ -156,10 +157,11 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
@@ -173,10 +175,11 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
@@ -190,10 +193,11 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
@@ -207,10 +211,11 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
@@ -224,10 +229,11 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
@@ -242,10 +248,11 @@ var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
 clearInterval(set);
 }
-var day = Math.floor(t/1000/60/60/24);
-var hour = Math.floor(t/1000/60/60%24);
-var min = Math.floor(t/1000/60%60);
-var sec = Math.floor(t/1000%60);
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
