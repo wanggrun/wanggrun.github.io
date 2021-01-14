@@ -14,6 +14,10 @@
 <span id="t_h_acl_paper">00Hour</span>
 <span id="t_m_acl_paper">00Minute</span>
 <span id="t_s_acl_paper">00Second</span>
+<span id="t_d_kdd_paper">00Day</span>
+<span id="t_h_kdd_paper">00Hour</span>
+<span id="t_m_kdd_paper">00Minute</span>
+<span id="t_s_kdd_paper">00Second</span>
 </DIV>
 <script type="text/javascript">
 
@@ -54,8 +58,24 @@ var sec = Math.floor(t/1000%60);
 document.getElementById("t_d_acl_paper").innerHTML = day + " Day";
 document.getElementById("t_h_acl_paper").innerHTML = hour + " Hour";
 document.getElementById("t_m_acl_paper").innerHTML = min + " Minute";
-document.getElementById("t_s_acl_paper").innerHTML = sec + " Second,    ACL 2021 paper\n";
+document.getElementById("t_s_acl_paper").innerHTML = sec + " Second,    ACL 2021 paper" + ";<br>";
 
+//KDD 2021 paper
+task = "_kdd_paper"
+var EndTime= new Date('2021/02/08 00:00:00'); //截止时间
+var NowTime = new Date();
+var t =EndTime.getTime() - NowTime.getTime();
+if(Math.floor(t/1000) == 0){
+clearInterval(set);
+}
+var day = Math.floor(t/1000/60/60/24);
+var hour = Math.floor(t/1000/60/60%24);
+var min = Math.floor(t/1000/60%60);
+var sec = Math.floor(t/1000%60);
+document.getElementById("t_d"+task).innerHTML = day + " Day";
+document.getElementById("t_h"+task).innerHTML = hour + " Hour";
+document.getElementById("t_m"+task).innerHTML = min + " Minute";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    KDD 2021 paper" + ";<br>";
 
 
 }
@@ -65,26 +85,10 @@ document.getElementById("t_s_acl_paper").innerHTML = sec + " Second,    ACL 2021
 
 
 // ///////////////////////////////////////////////////////////////////
-// //KDD 2021 paper 
-// var EndTime= new Date('2021/02/08 00:00:00'); //截止时间
+
 
 // function getRTime(){
-// var NowTime = new Date();
-// var t =EndTime.getTime() - NowTime.getTime();
-// if(Math.floor(t/1000) == 0){
-// clearInterval(set);
-// }
-// var day = Math.floor(t/1000/60/60/24);
-// var hour = Math.floor(t/1000/60/60%24);
-// var min = Math.floor(t/1000/60%60);
-// var sec = Math.floor(t/1000%60);
 
-
-
-// document.getElementById("t_d").innerHTML = day + " Day";
-// document.getElementById("t_h").innerHTML = hour + " Hour";
-// document.getElementById("t_m").innerHTML = min + " Minute";
-// document.getElementById("t_s").innerHTML = sec + " Second,    KDD 2021 paper";
 
 
 // ///////////////////////////////////////////////////////////////////
