@@ -34,6 +34,10 @@
 <span id="t_h_icml_paper">00Hour</span>
 <span id="t_m_icml_paper">00Minute</span>
 <span id="t_s_icml_paper">00Second</span>
+<span id="t_d_nips_abstract">00Day</span>
+<span id="t_h_nips_abstract">00Hour</span>
+<span id="t_m_nips_abstract">00Minute</span>
+<span id="t_s_nips_abstract">00Second</span>
 </DIV>
 <script type="text/javascript">
 
@@ -161,32 +165,32 @@ document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
 document.getElementById("t_s"+task).innerHTML = sec + " Second,    ICCV 2021 paper" + ";<br>";
 
+//NeuRIPS 2021 abstract
+task = "_nips_abstract"
+var EndTime= new Date('2021/05/27 00:00:00'); //截止时间
+var NowTime = new Date();
+var t =EndTime.getTime() - NowTime.getTime();
+if(Math.floor(t/1000) == 0){
+clearInterval(set);
+}
+var day = Math.floor(t/1000/60/60/24);
+var hour = Math.floor(t/1000/60/60%24);
+var min = Math.floor(t/1000/60%60);
+var sec = Math.floor(t/1000%60);
+document.getElementById("t_d"+task).innerHTML = day + " Day";
+document.getElementById("t_h"+task).innerHTML = hour + " Hour";
+document.getElementById("t_m"+task).innerHTML = min + " Minute";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    NeuRIPS 2021 abstract" + ";<br>";
+
 
 }
 
 
 
-// /////////////////////////////////////////
-// //NeuRIPS 2021 abstract 
-// var EndTime= new Date('2021/05/27 00:00:00'); //截止时间
-
-// function getRTime(){
-// var NowTime = new Date();
-// var t =EndTime.getTime() - NowTime.getTime();
-// if(Math.floor(t/1000) == 0){
-// clearInterval(set);
-// }
-// var day = Math.floor(t/1000/60/60/24);
-// var hour = Math.floor(t/1000/60/60%24);
-// var min = Math.floor(t/1000/60%60);
-// var sec = Math.floor(t/1000%60);
 
 
 
-// document.getElementById("t_d").innerHTML = day + " Day";
-// document.getElementById("t_h").innerHTML = hour + " Hour";
-// document.getElementById("t_m").innerHTML = min + " Minute";
-// document.getElementById("t_s").innerHTML = sec + " Second,    ICML 2021 abstract";
+
 
 
 
