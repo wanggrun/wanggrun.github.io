@@ -22,6 +22,14 @@
 <span id="t_h_acl_paper">00Hour</span>
 <span id="t_m_acl_paper">00Minute</span>
 <span id="t_s_acl_paper">00Second</span>
+<span id="t_d_icml_abstract">00Day</span>
+<span id="t_h_icml_abstract">00Hour</span>
+<span id="t_m_icml_abstract">00Minute</span>
+<span id="t_s_icml_abstract">00Second</span>
+<span id="t_d_icml_paper">00Day</span>
+<span id="t_h_icml_paper">00Hour</span>
+<span id="t_m_icml_paper">00Minute</span>
+<span id="t_s_icml_paper">00Second</span>
 <span id="t_d_kdd_paper">00Day</span>
 <span id="t_h_kdd_paper">00Hour</span>
 <span id="t_m_kdd_paper">00Minute</span>
@@ -34,14 +42,6 @@
 <span id="t_h_iccv_paper">00Hour</span>
 <span id="t_m_iccv_paper">00Minute</span>
 <span id="t_s_iccv_paper">00Second</span>
-<span id="t_d_icml_abstract">00Day</span>
-<span id="t_h_icml_abstract">00Hour</span>
-<span id="t_m_icml_abstract">00Minute</span>
-<span id="t_s_icml_abstract">00Second</span>
-<span id="t_d_icml_paper">00Day</span>
-<span id="t_h_icml_paper">00Hour</span>
-<span id="t_m_icml_paper">00Minute</span>
-<span id="t_s_icml_paper">00Second</span>
 <span id="t_d_nips_abstract">00Day</span>
 <span id="t_h_nips_abstract">00Hour</span>
 <span id="t_m_nips_abstract">00Minute</span>
@@ -70,10 +70,10 @@ var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
 
-document.getElementById("t_d"+task).innerHTML = "IJCAI 2021 Abstract:    "+ day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    IJCAI 2021 Abstract" + ";<br>";
 
 //IJCAI 2021 paper 
 task = "_ijcai_paper"
@@ -88,10 +88,10 @@ var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
 
-document.getElementById("t_d"+task).innerHTML = "IJCAI 2021 paper:    " + day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    IJCAI 2021 paper" + ";<br>";
 
 
 //ACL 2021 Abstract 
@@ -106,10 +106,10 @@ var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
 
-document.getElementById("t_d_acl_abstract").innerHTML = "ACL 2021 Abstract:    " + day + " Day";
+document.getElementById("t_d_acl_abstract").innerHTML = day + " Day";
 document.getElementById("t_h_acl_abstract").innerHTML = hour + " Hour";
 document.getElementById("t_m_acl_abstract").innerHTML = min + " Minute";
-document.getElementById("t_s_acl_abstract").innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s_acl_abstract").innerHTML = sec + " Second,    ACL 2021 Abstract" + ";<br>";
 
 
 //ACL 2021 paper
@@ -125,10 +125,11 @@ var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
 
 
-document.getElementById("t_d_acl_paper").innerHTML = "ACL 2021 paper:    " + day + " Day";
+document.getElementById("t_d_acl_paper").innerHTML = day + " Day";
 document.getElementById("t_h_acl_paper").innerHTML = hour + " Hour";
 document.getElementById("t_m_acl_paper").innerHTML = min + " Minute";
-document.getElementById("t_s_acl_paper").innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s_acl_paper").innerHTML = sec + " Second,    ACL 2021 paper" + ";<br>";
+
 
 //ICML 2021 abstract
 task = "_icml_abstract"
@@ -142,10 +143,10 @@ var day = Math.floor(t/1000/60/60/24);
 var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
-document.getElementById("t_d"+task).innerHTML = "ICML 2021 abstract:    " + day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    ICML 2021 abstract" + ";<br>";
 
 //ICML 2021 paper 
 task = "_icml_paper"
@@ -159,10 +160,10 @@ var day = Math.floor(t/1000/60/60/24);
 var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
-document.getElementById("t_d"+task).innerHTML = "ICML 2021 paper:    " + day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    ICML 2021 paper" + ";<br>";
 
 //KDD 2021 paper
 task = "_kdd_paper"
@@ -176,10 +177,10 @@ var day = Math.floor(t/1000/60/60/24);
 var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
-document.getElementById("t_d"+task).innerHTML = "KDD 2021 paper:    " + day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    KDD 2021 paper" + ";<br>";
 
 //ICCV 2021 abstract 
 task = "_iccv_abstract"
@@ -193,10 +194,10 @@ var day = Math.floor(t/1000/60/60/24);
 var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
-document.getElementById("t_d"+task).innerHTML = "ICCV 2021 abstract:    " + day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    ICCV 2021 abstract" + ";<br>";
 
 //ICCV 2021 paper 
 task = "_iccv_paper"
@@ -210,10 +211,10 @@ var day = Math.floor(t/1000/60/60/24);
 var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
-document.getElementById("t_d"+task).innerHTML = "ICCV 2021 paper:    " + day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    ICCV 2021 paper" + ";<br>";
 
 //NeuRIPS 2021 abstract
 task = "_nips_abstract"
@@ -227,10 +228,10 @@ var day = Math.floor(t/1000/60/60/24);
 var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
-document.getElementById("t_d"+task).innerHTML = "NeuRIPS 2021 abstract:    " + day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    NeuRIPS 2021 abstract" + ";<br>";
 
 
 //NeuRIPS 2021 paper 
@@ -245,10 +246,10 @@ var day = Math.floor(t/1000/60/60/24);
 var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
-document.getElementById("t_d"+task).innerHTML = "NeuRIPS 2021 paper:    " + day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    NeuRIPS 2021 paper" + ";<br>";
 
 
 }
