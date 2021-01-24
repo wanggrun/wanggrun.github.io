@@ -133,7 +133,6 @@ document.getElementById("t_m_acl_paper").innerHTML = min + " Minute";
 document.getElementById("t_s_acl_paper").innerHTML = sec + " Second,    ACL 2021 paper" + ";<br>" + "<br>";
 
 
-
 //ICML 2021 abstract
 task = "_icml_abstract"
 var EndTime= new Date('2021/01/29 19:59:59'); //截止时间
@@ -206,7 +205,6 @@ document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
 document.getElementById("t_s"+task).innerHTML = sec + " Second,    ICCV 2021 abstract" + ";<br>";
 
-
 //ICCV 2021 paper 
 task = "_iccv_paper"
 var EndTime= new Date('2021/03/18 15:59:59'); //截止时间
@@ -223,7 +221,8 @@ var sec = Math.max(0,Math.floor(t/1000%60));
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second,    <font color="red">ICCV 2021 paper</font>" + ";<br>" + "<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    ICCV 2021 paper" + ";<br>" + "<br>";
+document.getElementById("t_s"+task).style.color="#fff";
 
 // //NeuRIPS 2021 abstract
 // task = "_nips_abstract"
