@@ -203,7 +203,9 @@ var sec = Math.max(0,Math.floor(t/1000%60));
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second,    ICCV 2021 abstract" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second";
+document.getElementById(",    ICCV 2021 abstract" + ";<br>").style.color="#fff";
+
 
 //ICCV 2021 paper 
 task = "_iccv_paper"
