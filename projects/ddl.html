@@ -39,6 +39,10 @@
 <span id="t_h_kdd_paper">00Hour</span>
 <span id="t_m_kdd_paper">00Minute</span>
 <span id="t_s_kdd_paper">00Second</span>
+<span id="t_d_sk">00Day</span>
+<span id="t_h_sk">00Hour</span>
+<span id="t_m_sk">00Minute</span>
+<span id="t_s_sk">00Second</span>
 <span id="t_d_iccv_abstract">00Day</span>
 <span id="t_h_iccv_abstract">00Hour</span>
 <span id="t_m_iccv_abstract">00Minute</span>
@@ -241,6 +245,27 @@ document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
 document.getElementById("t_s"+task).innerHTML = sec + " Second,    KDD 2021 paper" + ";<br>" + "<br>";
+
+
+//sk 
+task = "_sk"
+var EndTime= new Date('2021/03/14 08:29:59'); //截止时间
+var NowTime = new Date();
+var t =EndTime.getTime() - NowTime.getTime();
+if(Math.floor(t/1000) == 0){
+clearInterval(set);
+}
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
+document.getElementById("t_d"+task).innerHTML = day + " Day";
+document.getElementById("t_h"+task).innerHTML = hour + " Hour";
+document.getElementById("t_m"+task).innerHTML = min + " Minute";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    SK 2021" + ";<br>" + "<br>";
+
+
 
 //ICCV 2021 abstract 
 task = "_iccv_abstract"
