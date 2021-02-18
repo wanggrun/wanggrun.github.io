@@ -18,7 +18,7 @@
 
 function getRTime(){
 var year = 2012
-document.getElementById("year").innerHTML = "王广润和石阳在一起纪念日 " + year + " Year:"+ "<br>" + "<br>";
+document.getElementById("year").innerHTML = "王广润和石阳在一起纪念日，从" + year + "年02月18日开始，至今已经："+ "<br>" + "<br>";
 //jn 
 task = "_jn"
 var EndTime= new Date('2012/02/18 00:00:00'); //截止时间
@@ -35,16 +35,16 @@ var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
 
 
-document.getElementById("t_d"+task).innerHTML = day + " Day";
+document.getElementById("t_d"+task).innerHTML = day + "天";
 document.getElementById("t_d"+task).style.color="red";
 document.getElementById("t_d"+task).style.fontWeight = "bold";
-document.getElementById("t_h"+task).innerHTML = hour + " Hour";
+document.getElementById("t_h"+task).innerHTML = hour + "小时";
 document.getElementById("t_h"+task).style.color="red";
 document.getElementById("t_h"+task).style.fontWeight = "bold";
-document.getElementById("t_m"+task).innerHTML = min + " Minute";
+document.getElementById("t_m"+task).innerHTML = min + "分钟";
 document.getElementById("t_m"+task).style.color="red";
 document.getElementById("t_m"+task).style.fontWeight = "bold";
-document.getElementById("t_s"+task).innerHTML = sec + " Second,    在一起纪念日" + ";<br>" + "<br>";
+document.getElementById("t_s"+task).innerHTML = sec + "秒,    愿岁月静好。" + ";<br>" + "<br>";
 document.getElementById("t_s"+task).style.color="red";
 document.getElementById("t_s"+task).style.fontWeight = "bold";
 
