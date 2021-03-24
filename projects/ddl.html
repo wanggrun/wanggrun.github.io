@@ -316,6 +316,40 @@ document.getElementById("t_s"+task).style.color="red";
 document.getElementById("t_s"+task).style.fontWeight = "bold";
 
 
+
+
+
+//ACL 2021 rebuttal
+var EndTime= new Date('2021/04/01 19:59:59'); //截止时间
+var NowTime = new Date();
+var t =EndTime.getTime() - NowTime.getTime();
+if(Math.floor(t/1000) == 0){
+clearInterval(set);
+}
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
+
+task = "_acl_rebuttal"
+document.getElementById("t_d"+task).innerHTML = day + " Day";
+document.getElementById("t_d"+task).style.color="red";
+document.getElementById("t_d"+task).style.fontWeight = "bold";
+document.getElementById("t_h"+task).innerHTML = hour + " Hour";
+document.getElementById("t_h"+task).style.color="red";
+document.getElementById("t_h"+task).style.fontWeight = "bold";
+document.getElementById("t_m"+task).innerHTML = min + " Minute";
+document.getElementById("t_m"+task).style.color="red";
+document.getElementById("t_m"+task).style.fontWeight = "bold";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    ACL 2021 Rebuttal" + ";<br>" + "<br>";
+document.getElementById("t_s"+task).style.color="red";
+document.getElementById("t_s"+task).style.fontWeight = "bold";
+
+
+
+
+
 //NeuRIPS 2021 abstract
 task = "_nips_abstract"
 var EndTime= new Date('2021/05/20 04:00:00'); //截止时间
@@ -355,32 +389,7 @@ document.getElementById("t_s"+task).innerHTML = sec + " Second,    NeuRIPS 2021 
 
 
 
-//ACL 2021 rebuttal
-var EndTime= new Date('2021/04/01 19:59:59'); //截止时间
-var NowTime = new Date();
-var t =EndTime.getTime() - NowTime.getTime();
-if(Math.floor(t/1000) == 0){
-clearInterval(set);
-}
-var day = Math.max(0,Math.floor(t/1000/60/60/24));
-var hour = Math.max(0,Math.floor(t/1000/60/60%24));
-var min = Math.max(0,Math.floor(t/1000/60%60));
-var sec = Math.max(0,Math.floor(t/1000%60));
 
-
-task = "_acl_rebuttal"
-document.getElementById("t_d"+task).innerHTML = day + " Day";
-document.getElementById("t_d"+task).style.color="red";
-document.getElementById("t_d"+task).style.fontWeight = "bold";
-document.getElementById("t_h"+task).innerHTML = hour + " Hour";
-document.getElementById("t_h"+task).style.color="red";
-document.getElementById("t_h"+task).style.fontWeight = "bold";
-document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_m"+task).style.color="red";
-document.getElementById("t_m"+task).style.fontWeight = "bold";
-document.getElementById("t_s"+task).innerHTML = sec + " Second,    ACL 2021 Rebuttal" + ";<br>" + "<br>";
-document.getElementById("t_s"+task).style.color="red";
-document.getElementById("t_s"+task).style.fontWeight = "bold";
 
 
 
