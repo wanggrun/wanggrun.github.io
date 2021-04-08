@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+                <span itemprop="name"><font size="5">3D表征学习和图像生成表征学习</font> </span>
+            </h1>
+    </div>
+    <div class="container">
+       <p>
+       Part 1: 3D表征学习
+       <br><br>
+       目前而言，3D表征学习主要有四种方法：1）Voxel grids比较适合3d卷积。但是这个voxel需要太多计算资源了。2）相反，点云太稀疏了。3）Meshes的方法比较适合表面比较稳定的物体，我猜测人脸可能可以。4）符号距离函数，以DeepSDF为代表。符号距离函数是指signed distance function for each category。除了DeepSDF还有一个比较新的叫PatchNets。DeepSDF和PatchNets都使用了AutoDecoder。DeepSDF需要很多的shape样本才能够进行学习，而PatchNets不需要太多的shape样本。且PatchNets的学习好像是类别无关的。PatchNets这篇文章与之前文章的不同之处在于，它想学习一个泛化的表征，1）可以用少量的样本进行学习；2）可以与类别无关；3）可以学习中层的泛化特征，而不是高层的object-specific的特征。所以它提出patch-level的特征表达学习。（话说回来，无监督自监督的特征是不是更加与类别无关或者更有泛化性呢？）
+       <br>
+       DeepSDF和PatchNets: (x, y, z; code) -> MLP ->回归一个符号距离。
+       <br>
+       code由输入一个常量经过一个MLP获得。
+       <br>
+       DeepSDF: Learning Continuous Signed Distance Functions
+       <br>
+       PatchNets: Patch-Based Generalizable Deep Implicit 3D Shape Representations
+       <br><br>
+       除了上面这些，我比较关注且在大公司比较火的一种算法，叫做NeRF。下面介绍一下NeRF以及相关变种。
+       <br>
+       NeRF：(x,y,z) -> MLP -> 体素密度sigma + 中层特征【注1】
+       <br>
+       (中层特征, 相机视角)-> {r,g,b}
+       <br>
+       训练好这个模型之后，将来输入几张图，就可以得到这个3D模型。
+       <br>
+       真正使用时，再根据这个3D模型渲染出2D图像。
+       <br>
+       那么，怎么渲染呢？这篇文章基于经典的volume rendering，提出了一种可微的渲染方式--基于分段随机离散近似volume rendering。【注2】
+       <br>
+       【注1】这里的（x,y,z）并非直接x,y,z，而是一个position encoding.
+       <br>
+       【注2】采用coarse-to-fine的方式进行采样，来提高效率。
+       <br>
+       整个过程是一个end-to-end的过程。图像->3D->图像，是一个对偶学习的过程。直接用mse loss就可以了。
+       <br>
+       整个训练过程约一两天。
+       <br>
+       NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis
+       <br><br>
+       FastNeRF
+       <br>
+       核心细节是：
+       <br>
+       NeRF：(x,y,z) -> MLP -> 体素密度sigma + {u,v,w}
+       <br>
+       (相机视角)-> beta
+       <br>
+       beta加权一下（u,v,w）得到(r,g,b)。
+       <br>
+       最后输出（r,g,b, 体素sigma）
+       <br>
+       由于u,v,w可缓存，所以速度非常快，大约比NeRF快3000倍。
+       <br>
+       FastNeRF: High-Fidelity Neural Rendering at 200FPS
+       <br><br>
+       AD-NeRF
+       <br>
+       功能：人说话，他的头、口、身体跟着转动。
+       <br>
+       核心细节是：
+       <br>
+       融合图像特征和语言特征，得到一个跨模态特征，然后分别输入一个头部的NeRF中【注3】。人头运动参数+跨模态特征+多帧连续光流估计转换成相机参数，输入身体NeRF中，最后头部和身体一块进行渲染，得到最后的输出。
+       <br>
+       【注3】头部NeRF的相机参数，由多帧连续光流估计转换成相机参数。这个非常棒。所以说相机参数可以是不需要显示给定的。
+       <br>
+       AD-NeRF: Audio Driven Neural Radiance Fields for Talking Head Synthesis
+       <br><br>
+       Neural Body
+       <br>
+       好像是先预测human pose(用的是SMPL？)，然后输入一个稀疏卷积神经网络中，得到一个code, 然后接上类似NeRF那一套。
+       <br>
+       Neural Body: Implicit Neural Representations with Structured Latent Codes for Novel View Synthesis of Dynamic Humans
+       <br><br>
+       Part 2: 图像生成表征学习
+       <br><br>
+       CLIP：
+       <br>
+       功能：分类、生成等等，万事皆为匹配。
+       <br>
+       核心细节：
+       <br>
+       训练：一对{图，文本}作contrastive learning。训练好这样的文本特征和图特征。
+       <br>
+       测试：先把所有的文本都提取出特征，然后每来一张图，比对图的特征和文本特征是否一致。把top-k图像输出（以文搜图）或把top-k文本输出（文本生成 ）。
+       <br>
+       Learning Transferable Visual Models From Natural Language Supervision
+       <br><br>
+       DALL.E
+       <br>
+       功能：输入一张图和输入一个句子，把图像变成文本所说的场景。
+       <br>
+       核心细节：
+       <br>
+       用dVAE对图像提取特征，用BPE提取单词特征。把图像特征和单词特征拼接（concat），然后输入transformfer回归或生成很多个图像（采样噪声可生成很多图像），利用上面的CLIP对生成的样本们进行检索。最终得到生成的图像。
+       <br>
+       Zero-Shot Text-to-Image Generation
+       <br><br>
+       StyleCLIP：
+       <br>
+       功能：可控制的图像生成
+       <br>
+       核心细节：就是把StypleGAN与CLIP结合。例如：把CLIP当成一种loss。
+       <br>
+       StyleCLIP: Text-Driven Manipulation of StyleGAN Imagery
+       <br><br>
+       GBP
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
