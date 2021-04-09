@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+                <span itemprop="name"><font size="5">我的思考：布朗运动处处不可导与未来神经网络</font> </span>
+            </h1>
+    </div>
+    <div class="container">
+       <p>
+      布朗运动是1827年由英国科学家布朗发现的。这是一种广泛存在的现象。我听过量子计算科学家潘建伟的讲座，他对布朗运动也有一些看法。而我自己，是从中学教科书中知道布朗运动的。
+      <br><br>
+      对布朗运动的研究，有几个历史上不得不提的人物。
+      <br><br>
+      一个是爱因斯坦。在1905年（爱因斯坦年），爱因斯坦首先使用概率方法对一维布朗运动进行了定量研究，从热分子运动扩散方程推导出了大量布朗粒子在t时刻位置{x1(t)，x2(t)，x3(t)，……}服从正态分布的性质。
+      <br><br>
+      1908年，法国物理学家通过实验证明了爱因斯坦的上述分析的正确性，并通过实验证明了原子的存在，还精确求出了物理上著名的阿伏伽德罗常数。他后来获得了诺贝尔奖。
+      <br><br>
+      接下来要提的人物，是维纳。正是维纳滤波的维纳。学习数学、EE专业（电子、通信、自动化）的人都知道维纳。18岁的维纳从哈佛毕业之后，来到英国剑桥大学。维纳在阅读完爱因斯坦关于布朗运动的研究论文后发现，爱因斯坦研究的是大量布朗粒子随机运动的统计规律，而没有涉及单个布朗微粒运动轨迹的数学性质。与爱因斯坦关注大量质点的统计行为不同，维纳关心的是“一个质点所走曲线的数学性质”。维纳将单个布朗粒子的位移x(t)抽象为随机变量，并用随机变量的正态分布特性来描述一个布朗粒子的运动规律，得出了“布朗粒子位移服从正态分布”、“布朗粒子位移与时间的平方根成正比”和“布朗运动样本轨道处处不可导（瞬时速度无穷大）”等著名论断【注1】。
+      <br><br>
+      维纳过程（有时也称布朗运动）可是随机过程中著名的过程。我上博士课程时，维纳过程处在教科书的前半部分。按照美国科学界的观点，一个研究是否处于前沿，不是看它发了多少Nature/science/cell，而是它处于教科书的前几页。越前，则代表越属于基础研究。
+      <br><br>
+      2010年，李统藏在science发文，其发现：布朗运动的导数（瞬时速度）不仅存在，而且可观测，并颠覆了维纳“布朗运动样本轨道处处不可导（瞬时速度无穷大）”的著名论断。这颠覆了随机过程的基本原理。我学习随机过程的时间在2010年之后，但是教科书仍然未涉及李统藏的内容。也许，教科书的更改，还需要时间和历史的检验和同行对新事物的广泛认可。
+      <br><br>
+      尽管如此，在我看来，维纳过程的“布朗运动样本轨道处处不可导（瞬时速度无穷大）”的著名论断，依然是非常让人震惊和优雅的理论。在今天的神经网络中，由于使用反向传播机制，网络必须可微可导。这有两大不足。（1）求导/求梯度机制在一些Nature/Science的文章中，被认为与人类大脑学习过程有所不同。而不可导、不可微，才符合人类神经网络。例如有人提出把激活层改成脉冲，提出脉冲神经网络。假设未来神经网络能够做到处处不可导，人工神经网络才是真正的与人类神经网络一致。人工智能才能和人类智能一致 。（2）处处可微、处处可导，导致人工神经网络极易受到对抗攻击。也就是通过反向传播（误导的损失函数或梯度上升），只需要往原图加上一些与梯度（相关的扰动，就能够使模型输入错误的结果。而人类并不会被这样的扰动所欺骗。
+      <br><br>
+      那么，既然我十分认可维纳过程，这是否意味着，我不能接受李统藏的实验呢？正好相反。我认为李的实验十分有意义。完全实现处处不可导，也许我们并不能实现这样的算法。但是，李的实验告诉我们，也许我们可以通过李的模型，对处处不可能进行近似逼近。这样，我们就可以利用算法实现一个类似于布朗运动/维纳过程的神经网络。
+      <br><br>
+      【注1】此部分参考了超级数学建模公众号的内容《物理学实验颠覆维纳“布朗运动处处不可导”著名论断》。
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
