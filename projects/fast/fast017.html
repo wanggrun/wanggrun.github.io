@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+                <span itemprop="name"><font size="5">基于投影条件判别器的条件GAN</font> </span>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+      这篇文章所做的还是cGANs (Conditional GAN, 条件GAN)。回顾历史，条件GAN的一个杰出代表是Cycle-GAN。我一度和Phil讨论争执，他认为条件GAN不算是Generative model。后来我想想也对，关于产生式模型(Generative model)和判别式模型（Discriminative model）定义自古就有，却有些模糊。在CRF和MRF中就有这个定义，并且关于一个模型是产生式模型还是判别是模型，往往是有一定争议的。现在谈起Generative model，最符合generative model的定义的，还是VAE。VAE是比较显示的generative model（有人说是比较有可解释性的generative model）。而GAN则一般被认为是隐式的generative model。采样一个噪声，即可生成一个图像。而条件GAN，例如CycleGAN以及更早pix2pix translation，用Phil的话，可能不算Generative model。它是固定的从一个图像域翻译成另外一个域。如输入一张图，输出它的segmentation map。输入一个google map， 输出一个卫星图。输入一个low resolution image, 输出一个high resolution image。本质上，这些可以直接用一个回归模型即可。只不过回归模型的输出图像有点模糊，所以才使用了一个GAN。输入图像（而非采样一个噪声），输出也是图像，这种称为条件GAN。所输入的图像即为条件（因为若是无图像输入，就只能采样一个噪声了，输入图像总是比采样噪声占了优势，因此这个输入图像称为条件）。
+      <br><br>
+      Anyway，能生成图像就可以，争论它是不是生成式模型并不是很重要。
+      <br><br>
+      回到本文，本文的创新不在于条件GAN，而在于提出了一个额外的conditional Discriminator (条件判别器)。关于条件判别器，我感觉不是很完美，甚至有点怪怪【注：王广聪博士曾向我介绍过这个问题】。最原始的判别器是把真（或假）图像输入一个判别器中，预测它是真图还是假图。条件判别器则在原始判别器上做一些小改进。
+      <br><br>
+      第一种改进是把真（或假）图像x与图像的标签y concatentate在一起，然后输入判别器中。再预测它是真图还是假图。例如，生成一个假猫图像x，则把x和标签cat (也许是一个one hot vector)拼在一块，再输入判别器网络中，预测图像真假。在我们【注：王广聪和我】看来，concat这个标签是有点怪怪的。至少不是一种完美的做法。
+      <br><br>
+      第二种改进是在隐层中实现类似第一种方案。把真（或假）图像x经过一个子网络得到隐层特征得到x'；同时把图像的标签y经过一个MLP得到一个隐层特征y'。再把x'和y'concatentate在一起，然后输入判别器中。再预测它是真图还是假图。例如，生成一个假猫图像x，提取其中间层特征x'，也对标签做一个embedding(类别word2vec)得到y'，然后把x‘和y'拼在一块，再输入判别器网络中，预测图像真假。
+      <br><br>
+      第三种方案相对合理一些。输入图像x经过一个判别网络，得到特征，然后在这个特征上加两个loss。第一个loss是和原始判别器一样，直接预测图像真伪。第二个loss是图像进行分类。例如分阿猫阿狗。这就是一个经典的multi-task框架。这种方法称为AC-GANs。
+      <br><br>
+      第四种方案是本文提出的一种方案。好像效果还挺不错。首先，和方案三一样，先用一个网络提取图像x的特征，得到x'。然后再在这个特征将这个特征x'与标签y求内积，得到x'y。x'再经过一个网络得到一个标量f(x')，最终输出一个标量 f(x') + x'y。当图像为真是，最大化标量 f(x') + x'y；当图像为假时，最小化标量 f(x') + x'y。
+      <br><br>
+      我们可以明显看出来，方案三和方案四很相似。相当于都是加了与标签相关的辅助loss。不过，方案四的效果好于方案三。我们可以思考两者之间的区别在哪里。
+      <br><br>
+      区别一：方案三的辅助loss是一个分类，也就是一个softmax规范化之后的概率。而方案四中，最大化x'y与最小化x'y直接在没有规范化的约束下进行，也许对优化比较有利。
+      <br><br>
+      区别二：方案三的主loss和辅助loss的求和有一个权重可调。而方案四则是直接将f(x') 与x'y按1：1相加，这就给了x'y更大的机会。
+      <br><br>
+      区别三：这个区别可能没有被大家注意到，但是可能相当重要。 在方案三中，辅助loss永远是对图像分物体类别，不管是真图还是假图，都分物体类别，不管真猫假猫，都分为猫。而在方案四中，当图像为真是，x'y被最大化，也就是做了一个物体类别分类。而图像为假时，x'y被最小化，也就是说，x'被排拆远离标签猫，即，假图中的猫不被认为是猫。
+       <br><br>
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
