@@ -184,7 +184,24 @@ a, a:visited { color : #0050e7; }
 
 
       Shortly put, learned features should follow the basic rule that similarity contracts and dissimilarity contrasts.<br>
-      学习的过程和一般的metric learning基本一样。
+      学习的过程和一般的metric learning基本一样。<br><br>
+
+
+      To be more precise, a good (linear) discriminative representation Z of X is one such that, given a partition Π of Z, achieves a large difference between the coding rate for the whole and that for all the subsets:<br>
+      很棒，这个公式和我们当年的triplet loss有异曲同工之秒。它最大化整体的code rate(diverse)，最小化类内的code rate。（但问题也来了，这使得类内的差异性变小，出现了作者claim的cross entropy的问题:类内的差异性和结构信息会被抑制和忽略。前后文矛盾了）<br><br>
+
+
+      In this work, to simplify the analysis and derivation, we adopt the simplest possible normalization schemes, by simply enforcing each sample on a sphere or the Frobenius norm of each subset being a constant<br>
+      在这一段里面，作者和bn强行拉了一下关系。最终作者采用的是l2 norm，这些规范化技术在triplet loss和contrastive learning中是很常用的。<br><br>
+
+
+      We refer to this as the principle of maximal coding rate reduction (MCR2 ), an embodiment of Aristotle’s famous quote: “the whole is greater than the sum of the parts.” <br>
+      虽然作者用了the whole is greater than the sum of the parts来解释，但我更偏向用”最大化整体的code rate(diverse)，最小化类内的code rate“来解释。<br><br>
+
+
+      另外一个问题来了：用mcr2类似于triplet loss，这就是文章前文所称的"所以这篇文章只是用标签来做一个辅助信息来学习特征"吗？这个似乎不太严谨。
+
+
        <br><br>
        <br><br>
        -----------------------------------
