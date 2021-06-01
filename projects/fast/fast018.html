@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+                <span itemprop="name"><font size="5">阅读马毅老师的“从第一性原则出发的深度学习”</font> </span>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+      这篇文章刚出来那几天，正好比较忙。这两天，抽空把这篇文章读了一下。以下是简要的读书笔记。这篇文章包含附录长达97页。其中正文40多页。<br><br>
+
+      这篇文章在非正式场合宣传中（如微博微信或公众号），经常被称为”从第一性原则出发的深度网络“。但是，也受到一些批评。第一性原则是一个foundermental的原则，例如物理中的对称原则（能量守恒定律、宇称守恒定律），用这个词来刻画本文，可能有点浮夸。<br><br>
+
+      ReduNet: A White-box Deep Network from the Principle of Maximizing Rate Reduction<br>
+      从最大下降率原则出发的一种白盒深度神经网络。<br><br>
+
+      maximizes the coding rate difference between the whole dataset and the average of all the subsets<br>
+      最大化“整体数据集” "所有子集的平均"之间的编码率差异<br><br>
+
+       constructed layer-by-layer via forward propagation, instead of learned via back propagation<br>
+      逐层搭建，只前向，不后向<br><br>
+
+      What exactly do we try to learn from and about the data?<br>
+      我们究竟想从数据中学习什么<br><br>
+
+      我们想从数据中学习什么样的表示？我们需要构建什么样的网络来实现这个目标<br><br>
+
+      learn a low-dimensional linear discriminative representation of the data:<br>
+      目标是学习低维线性判别性特征<br><br>
+
+      rate reduction
+      运价减成理论可以解决这个问题。<br><br>
+
+
+      where within-class variability and structural information are completely suppressed and ignored<br>
+      cross entropy loss有各种问题。其中一个问题是，类内的差异性和结构信息会被抑制和忽略。<br><br>
+
+       neural collapsing phenomenon. That is, features of each class are mapped to a one-dimensional vector whereas all other information of the class is suppressed. <br>
+      分类最终用一维来表达会出现上述的神经崩溃问题。<br><br>
+
+
+      The precise geometric and statistical properties of the learned features are also often obscured,<br>
+      所学习到的特征会缺乏几何特性和统计特性<br><br>
+
+
+      Formally, it seeks to maximize the mutual information I(z, y) (Cover and Thomas, 2006) between z and y while minimizing I(x, z) between x and z:<br>
+      x -> z > y<br>
+      最大化 z和y之间的互信息<br>
+      最小化x和z之间的互信息？<br>
+      和vae那么像？<br><br>
+
+
+      our framework uses the label y as only side information to assist learning distcriminative yet diverse (not minimal) representations; these representations optimize a different intrinsic objective based on the principle of rate reduction<br>
+      所以这篇文章只是用标签来做一个辅助信息来学习特征。<br><br>
+
+
+      Typically, such representations are learned in an end-to-end fashion by imposing certain heuristics on geometric or statistical “compactness” of z<br>
+      autoencoder也有类似的功能<br><br>
+
+       fail to capture all internal subclass structures or to explicitly discriminate among them for classification or clustering purposes.<br>
+      但是自编码可能会对类问题的区分没学习好。<br><br>
+
+       model collapsing in learning generative models for data that have mixed multi-modal structures <br>
+      所以自编码可能带来模型崩溃的问题（交叉熵会带来神经崩溃的问题）。<br><br>
+
+
+      If the above contractive learning seeks to reduce the dimension of the learned representation, contrastive learning (Hadsell et al., 2006; Oord et al., 2018; He et al., 2019) seems to do just the opposite<br>
+      然后这里又讨论了对比学习（这篇文章好像把各种工作的拉进来讨论，想做一个通用性的东西）。<br><br>
+
+
+      contractive learning and contrastive learning,<br>
+      这篇文章把自编码相关工作称为收缩学习，自监督学习称为对比学习（可能是为了单词的对称之美）。<br><br>
+
+
+      As we may see from the practice of both contractive learning and contrastive learning, for a good representation of the given data, people have striven to achieve certain tradeoff between the compactness and discriminativeness of the representation. Contractive learning aims to compress the features of the entire ensemble, whereas contractive learning expands features of any pair of samples. Hence it is not entirely clear why either of these two seemingly opposite heuristics seems to help learn good features. Could it be the case that both mechanisms are needed but each acts on different part of the data? As we will see, the rate reduction principle precisely reconciles the tension between these two seemingly contradictory objectives by explicitly specify to compress (or contract) similar features in each class whereas to expand (or contrast) the set of all features in multiple classes。其中：<br><br>
+
+      Contractive learning aims to compress the features of the entire ensemble,<br>
+      自编码收缩特征，而<br>
+      , whereas contractive learning expands features of any pair of samples. <br>
+      对比学习扩张特征。<br>
+      As we will see, the rate reduction principle precisely reconciles the tension between these two seemingly contradictory objectives by explicitly specify to compress (or contract) similar features in each class whereas to expand (or contrast) the set of all features in multiple classes
+      本文提出的方法可以综合这两方面的优劣。可以收缩同类的特征（那岂不是又落入cross entropy的缺点里面？），而扩张不同类的特征。<br><br>
+
+      So, how do we design a neural networks?<br>
+      那么，我们要怎么设计神经网络呢？<br><br>
+
+      Design a network<br>
+      设计一个网络<br><br>
+
+      or search for a neural networks<br>
+      网络结构搜索<br><br>
+
+
+
+      there has been apparent lack of direct justification of the resulting network architectures from the desired learning objectives, e.g. cross entropy or contrastive learning.<br>
+      问题在于，利用cross entropy和对比学习做目标来设计神经网络结构是未必准确的。作者认为，自己提出的方法相对这些目标，可行一些。<br><br>
+
+
+      To a large extent, this work will resolve this issue and reveal some fundamental relationships between sparse coding and deep representation learning.<br>
+      这篇文章从一个很高的程序，解释了sparse coding与深度表达学习之间的关系 。<br><br>
+
+
+      However, in both cases the forward-constructed networks seek a representation of the data that is not directly related to a specific (classification) task. To resolves limitations of both the ScatteringNet and the PCANet, this work shows how to construct a data-dependent deep convolution network in a forward fashion that leads to a discriminative representation directly beneficial to the classification task.<br>
+      这篇文章认为，用到标签信息是坏事。所以这篇文章的思想自监督学习有莫大的关联。<br><br>
+
+
+      To do so, we require our learned representation to have the following properties, called a linear discriminative representation (LDR):<br>
+      压缩编码想要线性可分。类内压缩/类内可分/还要deverse<br><br>
+
+
+      Here, however, although the intrinsic structures of each class/cluster may be low-dimensional, they are by no means simply linear (or Gaussian) in their original representation x and they need be to made linear through a nonlinear transform z = f(x).
+      Unlike LDA (or similarly SVM), here we do not directly seek a discriminant (linear) classifier. Instead, we use the nonlinear transform to seek a linear discriminative representation7 (LDR) for the data such that the subspaces that represent all the classes are maximally incoherent.<br>
+      那么，它和LDA/SVM就很像了。不过还是有区别的：LDA是用线性提一个特征，然后加一个非线性核，最后线性可分。而这篇文章，并不是用一个线性来提特征。这篇文章直接用一个非线性映射（如神经网络）来提一个特征，然后线性分类。（注：这个区别好像不明显。对LDA而言，我们可以认为加了非线性核之后才是相想的特征，这样来看，这篇文章的方法就和它们没有区别了）<br><br>
+
+
+
+      In this paper, we attempt to provide some answers to the above questions and offer a plausible interpretation of deep neural networks by deriving a class of deep (convolution) networks from first principles. We contend that all key features and structures of modern deep (convolution) neural networks can be naturally derived from optimizing the rate reduction objective, which seeks an optimal (invariant) linear discriminative representation of the data. More specifically, the basic iterative projected gradient ascent scheme for optimizing this objective naturally takes the form of a deep neural network, one layer per iteration.<br>
+      这篇文章称，它从第一性原理的角度，解释了神经网络。<br><br>
+
+
+      is there a simple but principled objective that can measure the goodness of the resulting representations in terms of all these properties? The key to these questions is to find a principled “measure of compactness” for the distribution of a random variable z or from its finite samples Z<br>
+      如何衡量紧凑性<br><br>
+
+
+      To alleviate this difficulty, another related concept in information theory, more specifically in lossy data compression, that measures the “compactness” of a random distribution is the so-called rate distortion (Cover and Thomas, 2006):<br>
+      比率失真可以衡量紧凑性<br><br>
+
+
+      Given a random variable z and a prescribed precision  eps > 0, the rate distortion R(z, eps) is the minimal number of binary bits needed to encode z such that the expected decoding error is less than , i.e., the decoded zb satisfies E[kz − zbk2] ≤ eps<br>
+      比率失真：给定一个eps，最小需要多少比特的编码<br><br>
+
+      Therefore, the compactness of learned features as a whole can be measured in terms of the average coding length per sample (as the sample size m is large), a.k.a. the coding rate subject to the distortion:<br>
+      综上，紧凑性可以所有样本的平均编码长度来衡量。<br><br>
+
+
+      In general, the features Z of multi-class data may belong to multiple low-dimensional subspaces. To evaluate the rate distortion of such mixed data more accurately, we may partition the data Z into multiple subsets: <br>
+      如果含有多个类别的话，则每一类都分开搞，然后求平均。<br><br>
+
+
+      Shortly put, learned features should follow the basic rule that similarity contracts and dissimilarity contrasts.<br>
+      学习的过程和一般的metric learning基本一样。
+       <br><br>
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
