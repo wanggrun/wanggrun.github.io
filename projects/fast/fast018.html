@@ -205,7 +205,33 @@ a, a:visited { color : #0050e7; }
 
 
       The maximal coding rate reduction can be viewed as a generalization to information gain (IG), which aims to maximize the reduction of entropy of a random variable, say z, with respect to an observed attribute, say π: maxπ IG(z,π) .= H(z) − H(z | π), i.e., the mutual information between z and π (Cover and Thomas, 2006). Maximal information gain has been widely used in areas such as decision trees (Quinlan, 1986). <br>
-      确实看形式来说，MCR2和互信息有一定的联系。全体与局部的互信息。
+      确实看形式来说，MCR2和互信息有一定的联系。全体与局部的互信息。<br><br>
+
+
+      We here reveal nice properties of the optimal representation with the special case of linear subspaces, which have many important use cases in machine learning<br>
+      我们将介绍MCR的美丽性质。<br><br>
+
+      Between-class Discriminative:
+      As long as the ambient space is adequately large (n ≥ k j=1 dj ), the subspaces are all orthogonal to each other<br>
+      类间两两正交<br><br>
+
+      Maximally Diverse Representation:<br>
+      差异性最大化<br><br>
+
+      In other words, the MCR2 principle promotes embedding of data into multiple independent subspaces,14 with features distributed isotropically in each subspace (except for possibly one dimension). In addition, among all such discriminative representations, it prefers the one with the highest dimensions in the ambient space<br>
+      本文的方法可以更好的保证每一类的空间比较正交，且偏好维度更高。传统的cross entropy无法做到这样。<br><br>
+
+
+      Orthogonal low-rank embedding (OLE) loss。∆R, OLE is always negative and achieves the maximal value 0 when the subspaces are orthogonal, regardless of their dimensions. So in contrast to ∆R, this loss serves as a geometric heuristic and does not promote diverse representations. In fact, OLE typically promotes learning one-dim representations per class, whereas MCR2 encourages learning subspaces with maximal dimensions (Figure 7 of Lezama et al. (2018) versus our Figure 17).<br>
+      和OLE的区别是：OLE和cross entropy一样，偏向把维度弄成1，也就是前面所说的作者claim的cross <br>entropy的问题:类内的差异性和结构信息会被抑制和忽略。（我不太赞同这个观点。就算是cross <br>entropy，我们所说的特征是指分类前一层。真的前一层会偏向把维度变成1吗？有实验经验的朋友会马上回答”No“。总之，作者cross-entropy的缺点时，前后文时常相互矛盾，有时指分类的前一层特征，有时有想用分类层来解释。）<br><br>
+
+      Relation to contractive or contrastive learning. <br>
+      本文的方法和对比学习（以及作者用的收缩学习这个词）和很大的相关性。尤其是与逐层对比学习相关性极大。我认为，对比学习可能优于本文的方法。本文认为，所提的方法可以与对比学习相结合。<br><br>
+
+
+
+      That is, we need to approximate the gradient flow ∂∆R ∂Z that locally deforms all (training) features {z i ` } m i=1 with a continuous mapping g(z) defined on the entire feature space z` ∈ R n<br>
+      梯度只局限于各个类内不好（说得不是很清楚为什么局限于类内），需要要加一项<br><br>
 
 
        <br><br>
