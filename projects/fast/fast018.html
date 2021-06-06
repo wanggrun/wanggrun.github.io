@@ -229,9 +229,48 @@ a, a:visited { color : #0050e7; }
       本文的方法和对比学习（以及作者用的收缩学习这个词）和很大的相关性。尤其是与逐层对比学习相关性极大。我认为，对比学习可能优于本文的方法。本文认为，所提的方法可以与对比学习相结合。<br><br>
 
 
+      <div align="center"><img src="./images/fast18_1.png" vspace="0 px" width="360 px" id="fast18_1" itemprop="photo"></div>
+      <br><br>
+
 
       That is, we need to approximate the gradient flow ∂∆R ∂Z that locally deforms all (training) features {z i ` } m i=1 with a continuous mapping g(z) defined on the entire feature space z` ∈ R n<br>
       梯度只局限于各个类内不好（说得不是很清楚为什么局限于类内），需要要加一项<br><br>
+
+
+      Remark 3 (Approximate Membership with a ReLU Network) The choice of the softmax is mostly for its simplicity as it is widely used in other (forward components of ) deep networks for purposes such as clustering, gating (Shazeer et al., 2017) and routing (Sabour et al., 2017). In practice, there are many other simpler nonlinear activation functions that one can use to approximate the membership πb(·) and subsequently the nonlinear operation σ in (24). Notice that the geometric meaning of σ in (24) is to compute the “residual” of each feature against the subspace to which it belongs. There are many different ways one may approximate this quantity. For example, when we restrict all our features to be in the first (positive) quadrant of the feature space,18 one may approximate this residual using the rectified linear units operation, ReLUs, on pj = C j ` z` or its orthogonal complement:<br>
+      这篇文章实际用了神经网络来实现它。<br><br>
+
+
+      <div align="center"><img src="./images/fast18_2.png" vspace="0 px" width="360 px" id="fast18_2" itemprop="photo"></div>
+      <br><br>
+
+
+
+      网络结构如上图所示。其实简单来说，就是k个非线性换（可认为是conv或fc+relu，其参数是C1到Ck），一个线性变换（可视为conv或fc,无激活函数，其参数为E），和一个identity(shortcut)。其中P代表着，l2规范化。<br><br>
+
+
+      <div align="center"><img src="./images/fast18_3.png" vspace="0 px" width="360 px" id="fast18_3" itemprop="photo"></div>
+      <br><br>
+
+
+      训练算法如上图所示。其中，第5行代表着，每一次迭代后，网络参数C和E可以直接计算得到。测试和训练基本一致。只不过测试的时候，不需要更新参数。所以测试时，第5行是没有的。<br><br>
+
+
+      In our experiments (see Section 5), we have observed that the basic gradient scheme sometimes converges slowly, resulting in deep networks with hundreds of layers (iterations)! To improve the efficiency of the basic ReduNet, one may consider in the future accelerated gradient methods such as the Nesterov acceleration (Nesterov, 1983) or perturbed accelerated gradient descent (Jin et al., 2018). Say to minimize or maximize a function h(z), such accelerated methods usually take the form。<br>
+      大家可以看到，前面的训练算法框架中，并没有BP。也就是网络是逐层前向传播，不需要反向的，因为每一次迭代后，网络参数C和E可以直接计算得到。不过，这里，作者指出，这样收敛很慢。所以，可以采样每一层先前向，后反向，再更新参数。这样，就与文章所claim的本文方法透明可解释，只前向不反向有点混淆。不过，在我看来，就算是每层BP进行梯度下降，也不影响本文所claim的内容。因为一层的BP，不应该看作是BP算法。这就是正常的梯度下降。<br><br>
+
+
+
+      Of course, like any other deep networks, the so-constructed ReduNet is amenable to fine-tuning via back-propagation if needed. A recent study from Giryes et al. (2018) has shown that such fine-tuning may achieve a better trade off between accuracy and efficiency of the unrolled network (say when only a limited number of layers, or iterations are allowed in practice). Nevertheless, for the ReduNet, one can start with the nominal values obtained from the forward construction, instead of random initialization. Benefits of fine-tuning and initialization will be verified in the experimental section (see Table 2).<br>
+      大家会问一个问题，为什么要这么费劲？如果直接end-to-end 将所有层合在一块进行BP求解，会变好吗？作者指出，先用本文的方法进行逐层训练，然后再合在一块BP，也是可以的。效果确实会提升。<br><br>
+
+
+      <div align="center"><img src="./images/fast18_4.png" vspace="0 px" width="360 px" id="fast18_4" itemprop="photo"></div>
+      <br><br>
+
+
+      这篇文章实验相对比较弱。只是在CIFAR-10做了一些小分析。公布有效结果的只有这个MNIST的表格。第一行代表本文方法的效果。第二行代表BP方法的效果。第三行代表先用本文方法训练，作为初始化，再用BP进行finetune的效果。虽然第三行确实比第二行高了不少。但是，可能比较不太合理。比较公平的方案是，第二行应该拉长训练时间，使得BP的时间(epoch) = 用本文方法初始化的epoch + BP finetune的epoch。也许公平来比较，本文的方法是比不过BP的。
+
 
 
        <br><br>
