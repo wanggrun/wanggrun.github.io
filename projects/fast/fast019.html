@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+                <span itemprop="name"><font size="5">阅读谷歌论文“When Vision Transformers Outperform ResNets...</font> </span>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+      ViT和MLP虽然取得了不错的进展，但是训练这两样东西，若要取得与CNN匹配有性能，需要更多的数据（如JFT-300 or imagenet-21k），更强的正则化。甚至初化始和学习率都影响很大。而相反，CNN的学习则相对很简单。<br><br>
+
+      这篇文章从loss进行分析，想提高ViT和MLP训练时的效率，以及测试时它们的泛化性。<br><br>
+
+      通过可视化发现，这些模型容易陷入尖锐的局部最优。利用最近的尖锐敏感性优化器，通过鼓励平滑性，可以大大提高它们的性能（在监督学习任务，对抗任务，对比学习任务，以及迁移任务中）。例如，在imagenet中可以提高vit的性能5.3%，在mlp中可提高11个点。不像以前的vit和mlp，本文不需要额外的数据集（jft-300 or imagenet-21k）来预训练，也不需要更强的augmentation。本文方法的attention maps也更加优美。<br><br>
+
+      由于缺少卷积的inductive bias(这个词就是一种高雅的用法，说有意思也有意思，说没意思也没意思，大约相当于是如果你不知道怎么表达，就用这个高深莫测的词好了，卷积中的localilaty/平移不变性等所带来的神奇且难以理解的性质称为inductive bias)，vit如果没有额外的数据预处理，性能会比imagenet低很多。但是加上大规模的预训练+强的data augmentation+更Tricky的超参数，vit会达到resnet相仿的性能。而计算资源消耗自然也就变大了。<br><br>
+
+      既然如此，vit和resnet对比就迷幻一般了。<br><br>
+
+      这篇文章用了一种优雅的优化器，在不需要额外大规模数据预训练（jft-300 or imagenet-21k）的情况下，使得vit的精度高于resnet，且使得mlp约等于resnet。(注：resnet用上这种新的优化器性能提升并没有vit和mlp大)。<br><br>
+
+
+      作者首先经过可视化loss，发现vit和mlp会收敛到一个非常尖的局部最优。同时，loss的海森矩阵可以看出，从后往回bp的时候，最开始的层的次对角海森矩阵有最大的特征值。第二，mlp会比vit的training loss更低，也就是更容易更拟合。第三，vit和mlp的迁移能力更差。<br><br>
+
+      这篇文章认为，一阶的优化器(如sgd, adam)只会追求最小化训练误差，没有考虑高阶信息（例如平滑性和泛化性），所以才会导致vit和mlp的这些问题。<br><br>
+
+      基于以上分析，作者想到用“尖锐敏感的”优化器(SAM)来平滑loss。SAM是google research发表在iclr 2021上（https://openreview.net/pdf?id=6Tm1mposlrM）的一篇文章。其代码已经开源（https://github.com/google-research/sam）。（The above study and reasoning lead us to the recently proposed sharpness-aware minimizer (SAM) [23] that explicitly smooths the loss geometry during model training. ）<br><br>
+
+      SAM这种算法，会平滑邻居的loss，而不只关注某个点。（SAM strives to find a solution whose entire neighborhood has low losses rather than focus on any singleton point.）<br><br>
+
+      这篇文章还有一些厉害的发现。一是：用SAM来优化，会使得海森矩阵的特征值会更加稀疏，层越低，这个现象越明显。而且权重的范数会增加，这说明普通的l2 weight decay可能不太适用。用进一步改进的空间。（By analyzing some intrinsic model properties, we find the models after SAM reduce the Hessian eigenvalues by activating sparser neurons (on ImageNet), especially in the first few layers. The weight norms increase, implying the commonly used weight decay may not be an effective regularization alone.）<br><br>
+
+      二是：vit被激活的神经元比较稀疏，说明vit有进一步减枝的可能。（注：由于vit相当于一个动态网络，那么稀疏的位置可能是动态变化的，所以，要想实现实际上加速的减枝，也许并没有作者所想的那么简单）（A side observation is that, unlike ResNets and MLP-Mixers, ViTs have extremely sparse active neurons (less than 5% for most layers), revealing the redundancy of input image patches and the capacity for network pruning.）<br><br>
+
+
+      （未完待续）
+
+       <br><br>
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-54220316b/?originalSubdomain=cn</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
