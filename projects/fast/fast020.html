@@ -95,7 +95,7 @@ a, a:visited { color : #0050e7; }
       (_, (_, logits)), grad = jax.value_and_grad(
       forward_and_loss, has_aux=True)(noised_model)<br>
 
-      #clip一下梯度且更新
+      #clip一下梯度且更新<br>
 
       grad = clip_by_global_norm(grad)
       new_optimizer = optimizer.apply_gradient(grad, learning_rate=lr)<br>
