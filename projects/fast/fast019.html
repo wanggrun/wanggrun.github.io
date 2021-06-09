@@ -79,7 +79,32 @@ a, a:visited { color : #0050e7; }
       二是：vit被激活的神经元比较稀疏，说明vit有进一步减枝的可能。（注：由于vit相当于一个动态网络，那么稀疏的位置可能是动态变化的，所以，要想实现实际上加速的减枝，也许并没有作者所想的那么简单）（A side observation is that, unlike ResNets and MLP-Mixers, ViTs have extremely sparse active neurons (less than 5% for most layers), revealing the redundancy of input image patches and the capacity for network pruning.）<br><br>
 
 
-      （未完待续）
+      一种广泛的认识是，如果损失函数收敛到一个平常的区域，泛化性会好。如果收敛到尖锐的区域，则泛化性不好。为此，这篇文章画了一个loss的收敛情况。可以发现vit和mlp收到到很尖的区域。（It has been extensively studied that the convergence to a flat region whose curvature is small benefits the generalization of neural networks [10, 13, 29, 30, 33, 48, 64]. Following [36], we plot the loss landscapes at convergence when ResNets, ViTs, and MLP-Mixers are trained from scratch on ImageNet with the basic Inceptionstyle preprocessing [51] (see Appendices for details). As shown in Figures 1(a) to 1(c), ViTs and MLP-Mixers converge to much sharper regions than ResNets）<br><br>
+
+      <div align="center"><img src="./images/fast19_1.png" vspace="0 px" width="700 px" id="fast18_2" itemprop="photo"></div>
+      <br><br>
+
+
+      具体的，这个尖锐/平滑程度可以用海森特征值来刻画。作者算了一下，vit和mlp的海森特征值确实很大。<br><br>
+
+
+      <div align="center"><img src="./images/fast19_2.png" vspace="0 px" width="700 px" id="fast18_2" itemprop="photo"></div>
+      <br><br>
+
+      还可以看出来，vit和mlp的泛化能力较差。甚至，mlp比vit的泛化性更差。<br><br>
+
+      为此，作者提出怎样的改进呢？<br><br>
+
+      SAM优化器：最小最大化： \min_w \max_{\epsilon 小于 很小的值\ro} loss(w+\epsilon)。其意思是，在领域内，最大的loss必须最小化。但是这个最小最大化计算比较麻烦。所以采用一阶近似。先算\epsilon = \ro* loss关于w的梯度/loss关于w的梯度的二范数。因此，这个SAM优化器是真是简单有效。（Intuitively, SAM [23] seeks to find the parameter w whose entire neighbours have low training loss Ltrain by formulating a minimax objective）。<br><br>
+
+      在鲁棒性方面，也公布了实验结果。值得注意的是，这里采用普通扰动来进行鲁棒性测试，而没有用对抗攻击来进行测试。（We also evaluate the models’ robustness using ImageNet-R [28] and ImageNetC [26] and find even bigger impacts of the smoothed loss landscapes. On ImageNet-C, which corrupts images by noise, bad weather, blur, etc., we report the average accuracy against 19 corruptions across five severity. As shown in Tables 1 and 2, the accuracies of ViT-B/16 and Mixer-B/16 increase by 9.9% and 15.0%, respectively, after SAM smooths their converged local regions.）<br><br>
+
+      作者也用了SAM在“有监督”对比学习上，得到了显著的提升。（We couple SAM with the supervised contrastive learning [31] for 350 epoch)。（ improving the ImageNet top-1 accuracy of ViT-S/16 from 77.0% to 78.1%, and ViT-B/16 from 77.4% to 80.0%.）<br><br>
+
+      有研究表明，对抗训练可以提高损失函数的平常性。有意思。（Moreover, similar to SAM, Shafahi et al. [46] suggest that adversarial training can flatten and smooth the loss landscape）<br><br>
+
+      总而言之，SAM对过拟合抑制，对泛化性的提交很有帮助。很让人有所启发。对我以往的工作有很多rethinking.
+
 
        <br><br>
        <br><br>
