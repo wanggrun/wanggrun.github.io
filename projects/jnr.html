@@ -17,8 +17,10 @@
 
 
 function getRTime(){
+var xx=10px
 var year = 2012
 document.getElementById("year").innerHTML = "王广润和石阳在一起纪念日," + "<br>" + "<br>" + "从" + year + "年02月18日开始，至今已经："+ "<br>" + "<br>";
+document.getElementById("year").style.fontSize =xx
 //jn 
 task = "_jn"
 var EndTime= new Date('2012/02/18 00:00:00'); //截止时间
@@ -38,15 +40,21 @@ var sec = Math.floor(t/1000%60);
 document.getElementById("t_d"+task).innerHTML = day + "天";
 document.getElementById("t_d"+task).style.color="red";
 document.getElementById("t_d"+task).style.fontWeight = "bold";
+document.getElementById("t_d"+task).style.fontSize =xx
 document.getElementById("t_h"+task).innerHTML = hour + "小时";
 document.getElementById("t_h"+task).style.color="red";
 document.getElementById("t_h"+task).style.fontWeight = "bold";
+document.getElementById("t_h"+task).style.fontSize =xx
 document.getElementById("t_m"+task).innerHTML = min + "分钟";
 document.getElementById("t_m"+task).style.color="red";
 document.getElementById("t_m"+task).style.fontWeight = "bold";
+document.getElementById("t_m"+task).style.fontSize =xx
 document.getElementById("t_s"+task).innerHTML = sec + "秒,    愿岁月静好。" + "<br>" + "<br>" +"天生才子佳人配，只羡鸳鸯不羡仙。" + "<br>" + "<br>";
 document.getElementById("t_s"+task).style.color="red";
 document.getElementById("t_s"+task).style.fontWeight = "bold";
+document.getElementById("t_s"+task).style.fontSize =xx
+
+
 
 
 
