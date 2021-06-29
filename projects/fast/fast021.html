@@ -54,7 +54,34 @@ a, a:visited { color : #0050e7; }
     <div class="container">
       <p>
 
-       （未完待续）
+      首先，在读这篇文章之前，我阅读过另外一篇文章，名字叫做“SiT: Self-supervised vIsion Transformer“（https://arxiv.org/pdf/2104.03602.pdf）。这两篇文章有相关之外。但是微软这篇更为优雅。<br><br>
+
+      代码链接：https://github.com/microsoft/unilm/tree/master/beit  （目前尚未开源）<br><br>
+
+      首先把原图tokenize成单词，然后像自然语言中的BERT一样，把若干单词掩盖掉，然后预测这些被掩盖的单词。训练好的encoder最后在下游任务中进行finetune，这也和BERT一样。（We first “tokenize” the original image into visual tokens. Then we randomly mask some image patches and fed them into the backbone Transformer. The pre-training objective is to recover the original visual tokens based on the corrupted image patches. After pre-training BEIT, we directly fine-tune the model parameters on downstream tasks by appending task layers upon the pretrained encoder. ）<br><br>
+
+      目前没有现在的视觉单词，所以没法像BERT一样做分类。(There is no pre-exist vocabulary for vision Transformer’s input unit, i.e., image patches. So we cannot simply employ a softmax classifier to predict over all possible candidates for masked patches)<br><br>
+
+
+      直接逐像素回归这些patch吧，又太浪费网络容量了。因为逐像素回归学到的是局部信息、高频信号。（A straightforward alternative is regarding the task as a regression problem, which predicts the raw pixels of masked patches. However, such pixel-level recovery task tends to waste modeling capability on pre-training short-range dependencies and high-frequency details）<br><br>
+
+
+      这篇文章的关键是如何tokenize，它用到了自编码。（MIM uses two views for each images, i.e., image patches, and visual tokens. We split the image into a grid of patches that are the input representation of backbone Transformer. Moreover, we “tokenize” the image to discrete visual tokens, which is obtained by the latent codes of discrete VAE (Ramesh et al., 2021). During pre-training, we randomly mask some proportion of image patches, and feed the corrupted input to Transformer. The model learns to recover the visual tokens of the original image, instead of the raw pixels of masked patches.）<br><br>
+
+
+      这篇文章也对tokenize所用到的这个自编码进行了理论解释（We also provide a theoretical explanation from the perspective of variational autoencoder.）。<br><br>
+
+
+      具体怎么做tokenize呢？这篇文章采样的是离散自编码，即dVAE。注意，这里引用的这篇文章正是DALL.E那篇文章。怎么实现离散化呢？使用了Gumbel Softmax。（Following (Ramesh et al., 2021), we learn the image tokenizer via discrete variational autoencoder.  Gumbel-softmax relaxation (Jang et al., 2017; Maddison et al., 2017) is employed to train the model parameters.）<br><br>
+
+
+
+      具体Mask的超参怎么设置呢？请参考这一段。采用Blockwise的形式（Dropblock）。与NLP中mask大约15%的单词有所不同。这里mask掉了大约40%的面积。（Rather than randomly choosing patches for the masked positions M, we employ blockwise masking in our work. As summarized in Algorithm 1, a block of image patches is masked each time. For each block, we set the minimum number of patches to 16. Then we randomly choose an aspect ratio for the masking block. We repeat the above two steps until obtaining enough masked patches, i.e., 0.4N, where N is the total number of image patches, and 0.4 is masking ratio.）<br><br>
+
+
+      在理论解释方面，这篇文章把本文方法解释成一个变分自编码。训练tokenizer的过程视为第一阶段。训练回归mask部分的过程，视为第二阶段。（We learn the model following a two-stage procedure similar to (van den Oord et al., 2017; Razavi et al., 2019). In the first stage, we obtain the image tokenizer as a discrete variational autoencoder (Ramesh et al., 2021). Specifically, the first stage minimizes the reconstruction loss −Ezi∼qφ(z|xi) [log pψ(xi |zi)] with an uniform prior as described in Equation (2). In the second stage, we learn the prior pθ while keeping qφ and pψ fixed. ）<br><br>
+
+      实验结果：核心结果在表1中。不过，第一组“Training from scratch”和第二组“Supervised Pre-Training on ImageNet-1K”结果相同；第三组“Self-Supervised Pre-Training on ImageNet-1K”与第四组“Self-Supervised Pre-Training, and Intermediate Fine-Tuning on ImageNet-1K”结果相同。令人奇怪。
 
 
        <br><br>
