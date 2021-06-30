@@ -54,7 +54,32 @@ a, a:visited { color : #0050e7; }
     <div class="container">
       <p>
 
-       （码字中）
+      DALL.E的tokenize可以视为一个极其简单的AE:<br><br>
+
+      首先进行编码，使用编码网络enc()。这个网络就是若干个卷积层，大约经历了8倍下采样。注意，编码后的输出，并非变成一个向量，而是一组大约为cx32x32的feature maps。<br>
+      z_logits = enc(x)<br><br>
+
+      然后，使用一个argmax()函数，把上述编码的cx32x32的feature maps变成一个1x32x32的map了。<br>
+      z = torch.argmax(z_logits, axis=1)<br><br>
+
+      然后把上述1x32x32的feature map又用one-hot函数变回cx32x32的feature map。<br>
+      z = F.one_hot(z, num_classes=enc.vocab_size).permute(0, 3, 1, 2).float()<br><br>
+
+      上述两步是只在测试阶段，而在训练阶段怎么做呢？两步并做一步，直接用一个GumbelSoftmax就可以得到这个cx32x32的map啦。<br><br>
+
+      然后解码回原图<br>
+      x_stats = dec(z).float()<br><br>
+
+      原本直接全名用sigmoid就好啦。这里加了一个带阀值的unmap_pixels()函数来调一下。<br><br>
+
+      x_rec = unmap_pixels(torch.sigmoid(x_stats[:, :3]))<br>
+      x_rec = T.ToPILImage(mode='RGB')(x_rec[0])<br><br>
+
+      这个unmap_pixels()函数很直观，定义为：torch.clamp((x - 0.1) / (1 - 2 * 0.1), 0, 1)<br><br>
+
+
+      display_markdown('Reconstructed image:')<br>
+      display(x_rec)
 
 
        <br><br>
