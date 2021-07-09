@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+                <span itemprop="name"><font size="5">Auto Annotation Machine</font> </span>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+
+      BY Guangrun Wang<br><br>
+
+      Model:<br>
+      efficientnet-b1+aspp;<br>
+      Big model: efficientnet-b1+aspp;<br><br>
+
+      def forward(self, x):<br>
+          size = (x.shape[2], x.shape[3])<br>
+          x = self.efficientnet_model(x)<br>
+          x = self.aspp(x)<br>
+          x = self.conv_cls(x)<br>
+          x = nn.Upsample(size, mode='bilinear', align_corners=True)(x)<br>
+          return x<br><br>
+
+      Machine: 8 titanX GPUs, each of which is 12G<br>
+      Epochs: 50<br>
+      Test-stage augmentation: [257, 385, 513, 641, 769]:<br>
+      Test-stage augmentation: Left-right Flipping<br><br>
+
+      Dataset: PASCAL VOC<br>
+      Training set<br>
+      1.  TrainAug<br>
+      2.  1/4 TrainAug<br>
+      3.  1/4 TrainAug + 3/4 TrainAug (Auto annotated)<br><br>
+
+      Test set:<br>
+      1. VOC Val<br><br>
+
+
+      Results:<br>
+      1. TrainAug<br>
+      w/o multi-scale, w/o flipping:<br>
+      IoU 0: 91.14
+      IoU 1: 70.37
+      IoU 2: 34.44
+      IoU 3: 82.24
+      IoU 4: 55.90
+      IoU 5: 66.08
+      IoU 6: 86.84
+      IoU 7: 77.51
+      IoU 8: 88.38
+      IoU 9: 32.21
+      IoU 10: 63.96
+      IoU 11: 47.69
+      IoU 12: 80.13
+      IoU 13: 76.14
+      IoU 14: 64.28
+      IoU 15: 77.74
+      IoU 16: 50.22
+      IoU 17: 75.06
+      IoU 18: 44.94
+      IoU 19: 69.88
+      IoU 20: 62.75<br>
+      Mean IoU: 66.57<br><br>
+
+
+      w/ multi-scale, w/ flipping:<br>
+      IoU 0: 92.75
+      IoU 1: 82.19
+      IoU 2: 39.18
+      IoU 3: 86.80
+      IoU 4: 65.64
+      IoU 5: 72.65
+      IoU 6: 89.32
+      IoU 7: 81.98
+      IoU 8: 91.11
+      IoU 9: 33.49
+      IoU 10: 72.78
+      IoU 11: 46.98
+      IoU 12: 84.85
+      IoU 13: 80.99
+      IoU 14: 71.17
+      IoU 15: 81.25
+      IoU 16: 56.47
+      IoU 17: 81.00
+      IoU 18: 44.05
+      IoU 19: 79.13
+      IoU 20: 65.85<br>
+      Mean IoU: 71.41<br><br>
+
+      2. 1/4 TrainAug<br>
+      w/o multi-scale, w/o flipping:<br>
+      IoU 0: 88.29
+      IoU 1: 57.06
+      IoU 2: 28.15
+      IoU 3: 69.89
+      IoU 4: 53.46
+      IoU 5: 42.93
+      IoU 6: 77.99
+      IoU 7: 69.24
+      IoU 8: 79.15
+      IoU 9: 23.78
+      IoU 10: 30.61
+      IoU 11: 21.32
+      IoU 12: 60.54
+      IoU 13: 43.70
+      IoU 14: 58.71
+      IoU 15: 67.90
+      IoU 16: 21.41
+      IoU 17: 41.53
+      IoU 18: 31.56
+      IoU 19: 69.03
+      IoU 20: 56.48<br>
+      Mean IoU: 52.03<br><br>
+
+      Big Model:<br>
+      IoU 0: 90.03
+      IoU 1: 67.75
+      IoU 2: 32.86
+      IoU 3: 72.25
+      IoU 4: 62.04
+      IoU 5: 67.90
+      IoU 6: 83.94
+      IoU 7: 76.87
+      IoU 8: 85.40
+      IoU 9: 27.14
+      IoU 10: 63.42
+      IoU 11: 34.75
+      IoU 12: 76.64
+      IoU 13: 62.85
+      IoU 14: 67.88
+      IoU 15: 76.35
+      IoU 16: 43.29
+      IoU 17: 63.98
+      IoU 18: 38.06
+      IoU 19: 76.52
+      IoU 20: 60.89<br>
+      Mean IoU: 63.37<br><br>
+
+
+      w/ multi-scale, w/ flipping: <br>
+      IoU 0: 90.03
+      IoU 1: 65.20
+      IoU 2: 29.33
+      IoU 3: 74.74
+      IoU 4: 61.35
+      IoU 5: 47.67
+      IoU 6: 81.33
+      IoU 7: 73.16
+      IoU 8: 81.72
+      IoU 9: 23.15
+      IoU 10: 26.54
+      IoU 11: 18.05
+      IoU 12: 66.63
+      IoU 13: 44.61
+      IoU 14: 64.47
+      IoU 15: 69.18
+      IoU 16: 18.00
+      IoU 17: 48.87
+      IoU 18: 28.74
+      IoU 19: 73.61
+      IoU 20: 57.69<br>
+      Mean IoU: 54.48<br><br>
+
+      Big Model:<br>
+      IoU 0: 91.56
+      IoU 1: 76.36
+      IoU 2: 35.28
+      IoU 3: 77.22
+      IoU 4: 67.74
+      IoU 5: 72.06
+      IoU 6: 86.69
+      IoU 7: 80.83
+      IoU 8: 87.36
+      IoU 9: 28.88
+      IoU 10: 65.45
+      IoU 11: 36.12
+      IoU 12: 79.04
+      IoU 13: 65.09
+      IoU 14: 72.73
+      IoU 15: 79.33
+      IoU 16: 46.04
+      IoU 17: 67.98
+      IoU 18: 39.44
+      IoU 19: 80.38
+      IoU 20: 63.60<br>
+      Mean IoU: 66.63<br><br>
+
+      3. 1/4 TrainAug + 3/4 TrainAug (Auto annotated)<br>
+      IoU 0: 91.13
+      IoU 1: 64.52
+      IoU 2: 36.17
+      IoU 3: 80.61
+      IoU 4: 68.63
+      IoU 5: 68.27
+      IoU 6: 87.86
+      IoU 7: 79.37
+      IoU 8: 87.80
+      IoU 9: 28.03
+      IoU 10: 68.95
+      IoU 11: 40.43
+      IoU 12: 80.06
+      IoU 13: 72.18
+      IoU 14: 74.71
+      IoU 15: 77.87
+      IoU 16: 46.76
+      IoU 17: 68.72
+      IoU 18: 44.14
+      IoU 19: 65.97
+      IoU 20: 62.45
+      Mean IoU: 66.41
+
+
+  
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
