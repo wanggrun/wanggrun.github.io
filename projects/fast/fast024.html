@@ -61,12 +61,12 @@ a, a:visited { color : #0050e7; }
       Big model: efficientnet-b1+aspp;<br><br>
 
       def forward(self, x):<br>
-          size = (x.shape[2], x.shape[3])<br>
-          x = self.efficientnet_model(x)<br>
-          x = self.aspp(x)<br>
-          x = self.conv_cls(x)<br>
-          x = nn.Upsample(size, mode='bilinear', align_corners=True)(x)<br>
-          return x<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;size = (x.shape[2], x.shape[3])<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;x = self.efficientnet_model(x)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;x = self.aspp(x)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;x = self.conv_cls(x)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;x = nn.Upsample(size, mode='bilinear', align_corners=True)(x)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;return x<br><br>
 
       Machine: 8 titanX GPUs, each of which is 12G<br>
       Epochs: 50<br>
