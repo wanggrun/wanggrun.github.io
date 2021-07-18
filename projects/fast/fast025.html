@@ -54,9 +54,11 @@ a, a:visited { color : #0050e7; }
     <div class="container">
       <p>
 
-      AlphaFold2是deepmind发表在nature上的一篇文章。据说，发表周期非常快(加急预览：Nature的Accelerated Article Preview)，可能是因为是同一天，science发表了另一外来自华盛顿大学的另一个竞争工作（ RoseTTAFold，文章见：https://science.sciencemag.org/content/early/2021/07/14/science.abj8754，；代码见：https://github.com/RosettaCommons/RoseTTAFold ）。nature抓紧把deepmind这篇也快速见刊，使得更有噱头（猜测）。<br><br>
+      AlphaFold2是deepmind发表在nature上的一篇文章。据说，发表周期非常快(加急预览：Nature的Accelerated Article Preview)，可能是因为是同一天，science发表了另一外来自华盛顿大学的另一个竞争工作（RoseTTAFold）。nature抓紧把deepmind这篇也快速见刊，使得更有噱头（猜测）。<br>
+      RoseTTAFold文章见：https://science.sciencemag.org/content/early/2021/07/14/science.abj8754；<br>
+      RoseTTAFold代码见：https://github.com/RosettaCommons/RoseTTAFold <br><br>
 
-      AlphaFold2的论文见：https://www.nature.com/articles/s41586-021-03819-2_reference.pdf
+      AlphaFold2的论文见：https://www.nature.com/articles/s41586-021-03819-2_reference.pdf<br>
       代码见：https://github.com/deepmind/alphafold<br><br>
 
 
@@ -80,7 +82,7 @@ a, a:visited { color : #0050e7; }
       <br><br>
 
       上图看起来挺复杂，其实很简单。首先，输入是一个蛋白质序列（也许或者专业称为蛋白质的核酸序列，即图中的人序列）。然后，这个序列输到两个分支。<br><br>
-      
+
 
       在上面这个分支中，我们用这个蛋白质的核酸序列去一个数据库中进行搜索，得到与它相关（例如是相似？）的若干条系列（图中有3条，分别为鱼序列、兔序列和鸡序列）。再加上输入的人序列，共计有四个序列。文章中记序列长为N_seq (图中N_seq = 6)，记序列个数为N_res （图中N_res = 4）。然后，这4条长度为6的序列（多次循环中称为 multiple sequence alignments (MSAs)），输入到一个叫做Evoformer中（Transformer的一种），最终输入同样是4条长度为6的序列。<br><br>
 
