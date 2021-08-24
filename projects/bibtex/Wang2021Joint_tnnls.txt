@@ -1,0 +1,11 @@
+@article{Wang2021Joint_tnnls,
+  author    = {Guangrun Wang and
+               Liang Lin and
+               Rongcong Chen and
+               Guangcong Wang and
+               Jiqi Zhang},
+  title     = {Joint Learning of Neural Transfer and Architecture Adaptation for
+               Image Recognition},
+  journal   = {IEEE Transactions on Neural Networks and Learning Systems (T-NNLS)},
+  year      = {2021},
+}

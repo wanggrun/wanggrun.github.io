@@ -1,0 +1,13 @@
+@inproceedings{Zhang2021Pi_iccv,
+  author    = {Jiqi Zhang and
+               Jiefeng Peng and
+               Changlin Li and
+               Guangrun Wang and 
+               Xiaodan Liang
+               and Liang Lin},
+  title     = {Pi-NAS: Improving Neural Architecture Search by Reducing Supernet Training Consistency Shift},
+  booktitle = {{IEEE} International Conference on Computer Vision, {ICCV} 2021},
+  pages     = {},
+  publisher = {{IEEE} Computer Society},
+  year      = {2021},
+}

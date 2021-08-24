@@ -1,0 +1,8 @@
+@InProceedings{Li2021Dynamic_CVPR,
+    author    = {Li, Changlin and Wang, Guangrun and Wang, Bing and Liang, Xiaodan and Li, Zhihui and Chang, Xiaojun},
+    title     = {Dynamic Slimmable Network},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2021},
+    pages     = {8607-8617}
+}

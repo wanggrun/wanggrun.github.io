@@ -1,0 +1,16 @@
+@inproceedings{Li2021BossNAS_iccv,
+  author    = {Changlin Li and
+               Tao Tang and
+               Guangrun Wang and
+               Jiefeng Peng and
+               Bing Wang and
+               Xiaodan Liang and
+               Xiaojun Chang},
+  title     = {BossNAS: Exploring Hybrid CNN-transformers with Block-wisely Self-supervised
+               Neural Architecture Search},
+  booktitle = {{IEEE} International Conference on Computer Vision, {ICCV} 2021},
+  pages     = {},
+  publisher = {{IEEE} Computer Society},
+  year      = {2021},
+}
+
