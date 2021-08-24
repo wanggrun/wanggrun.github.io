@@ -1,0 +1,12 @@
+@inproceedings{Wang2021Solving_iccv,
+  author    = {Guangrun Wang and
+               Keze Wang and
+               Guangcong Wang and
+               Philip H. S. Torr and
+               Liang Lin},
+  title     = {Solving Inefficiency of Self-supervised Representation Learning},
+  booktitle = {{IEEE} International Conference on Computer Vision, {ICCV} 2021},
+  pages     = {},
+  publisher = {{IEEE} Computer Society},
+  year      = {2021},
+}
