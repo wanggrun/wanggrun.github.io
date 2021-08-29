@@ -1,0 +1,13 @@
+@inproceedings{Dong2021EfficientBERT_emnlp,
+  author    = {Chenhe Dong and
+               Guangrun Wang and
+               Hang Xu and
+               Jiefeng Peng and
+               Xiaozhe Ren and
+               Xiaodan Liang},
+  title     = {EfficientBERT: Progressively Searching Multilayer Perceptron via Warm-up Knowledge Distillation},
+  booktitle = {Findings of Conference on Empirical Methods in Natural Language Processing, {EMNLP} 2021},
+  pages     = {},
+  publisher = {},
+  year      = {2021},
+}
