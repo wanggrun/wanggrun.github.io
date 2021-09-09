@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+              <div align="center">
+                <span itemprop="name"><font size="5">A Deep Learning Method for 3D Human Reconstruction -- 3D人物形状预测(3D人物重建)</font> </span>
+              </div>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+
+      论文题目为：Synthetic Training for Accurate 3D Human Pose and Shape Estimation in the Wild<br>
+      论文代码为：https://github.com/akashsengupta1997/STRAPS-3DHumanShapePose<br><br>
+
+      这篇文章发表在BMVC 2020上，是剑桥大学的一项工作。文章挺简洁明了的。<br><br>
+
+      文章的主要贡献是，以RGB图像为输入，直接预测人物3D形状和Pose。（This paper addresses the problem of monocular 3D human shape and pose estimation from an RGB image. ）<br><br>
+
+      摘要：<br>
+      这个工作和新颖之处在于，使用了合成数据集，而非真实数据集。但据我们所知，如果使用合成数据集的话，会有一个比较大的问题是，存在Domain Gap。也就是，当我们用合成数据集训练好一个模型之后，在真实数据中可能不work。怎么解决这个问题呢？这篇文章并不是直接用RGB图作为网络的输入，而是把RGB图先转为代理特征（proxy representations, such as silhouettes and 2D joints, as inputs）。 然后再用代理特征做为网络的输入。Proxy representation在虚拟试穿（virtual try-on）中非常常用。在本文中，代理特征指的是“人物的轮廓(sihouettes)与关节点(joints)。提取轮廓的方法是直接用segmentation就可以了。提取关键点也可以直接用openpose代码库或者densepose代码库就可以了。如此一来，我们并不需要直接用合成RGB图像作为网络模型的输入，而是使用轮廓+关节点作为网络模型的输入。那么，当我们用真实图像做测试时，也只需要用segmentation和openpose把真实图像的人物轮廓及关节点事先提取好，作为代理特征输入我们训练好的模型中。这样，由于真实数据和合成数据都是用轮廓和关节点做为模型的输入，它们之间的Gap会非常小。因此，训练好的模型可以从合成数据泛化到真实数据中。为了验证本文所提方法的有效性，作者建立了一个现实数据集，叫做Sports Shape and Pose 3D (SSP-3D)。<br><br>
+
+
+      正文：<br>
+      现有的方法为什么不太准呢？因为数据量有限，所以所学到的模型的泛化能力堪忧。（We suggest that this is due to a lack of body shape diversity within the prevalent training datasets. Most learning-based models will struggle to generalise to unseen test data if the distribution of the test data is significantly different from the training data distribution）<br><br>
+
+
+      在这里插播一个知识：经过统计建模，人类的身体3D形状，可以用SMPL模型建模。具体地，每扫描一个身体得到的3D数据，都可以用96维的向量来表达。这就很有趣了。我们可以简单理解来：有了SMPL这个统计先验，每个人的3D形状都与一个96维的向量一一对应。同样的，人脸也有一个现有的统计模型。既然如此，SMPL就是一个很强的先验了。<br><br>
+
+      本文的方法极其简单，随机产生96维的向量，利用SMPL模型得到3D的人，然后用pytorch3D软件把它们渲染成2D的图像。以2D图像为输入，预测这96维向量。（This is done by sampling target SMPL shape and pose parameters from a training distribution and rendering the corresponding silhouettes and 2D joints, which act as inputs）<br><br>
+
+      因为数据是随机采样96维向量合成的，所以可以随机采样各式各样的数据，包含尽可能多的分布。同时，作者也利用data augmentation和corruption策略来增加数据的多样性。（Since we can choose the form of the training distribution, we have control over the diversity of human body shapes seen by the regressor during training. We utilise simple data augmentation and corruption techniques）<br><br>
+
+      同时，为了验证本文所提方法的有效性，作者建立了一个现实数据集，叫做Sports Shape and Pose 3D (SSP-3D)。这个数据据的构建，也是比较不严格。它是从sports-1M那里得到视频，然后利用multi-view/multi-frame的传统优化策略，用传统的经典非深度学习方法，得到SMPL模型的96个参数，从而得到3D结果。此结果视为该数据集的ground-truth。因此，这个数据集也不是太准的。（Moreover, we curate and provide Sports Shape and Pose 3D (SSP-3D), a dataset which contains images of tightly-clothed sports-persons with a diverse range of body shapes in varied environments, obtained from the Sports-1M video dataset [9]. We use multi-frame optimisation, with forced shape consistency between frames, to obtain pseudo-ground-truth SMPL shape and pose parameters for the sports-person in each image）<br><br>
+
+      相关工作：3D形状估计可以分为两大类：一个是传统经典的optimization-based method，一种是learning-based method。目前来说，optimization based的方法还是挺流行。不像2D视觉，传统方法几乎绝迹了。3D视觉中，传统方法依然可以得到继续发展。（approaches can be classified into two paradigms: optimisation-based and learning-based.）<br><br>
+
+      但是，传统optimization-based的方法有若干缺点，首先是测试的时间耗时挺大，其次是对初始化的依赖非常大，第三是容易掉入局部最优中。(However, they are slow at test-time, sensitive to initialisation and can get stuck in bad local minima, which motivates learning-based approaches.)<br><br>
+
+      Learning-based的方法（一般来说，是基于deep learning的方法）进一步可以分为两大类。第一类是非参回归。例如voxel和vertex的回归。（Learning-based approaches can be further divided into two types: non-parametric 3D regression and body model parameter regression. Non-parametric 3D regression involves predicting a 3D human body representation from an image, such as a voxel occupancy grid [29] or vertex mesh）但是这类回归有不少问题。首先，我们哪去得到这些voxels数据?对着人体扫描也得不到这么多Voxel（这也是3D卷积的局限性）。Vertex或点云则易获取一些，不过，用vertex mesh数据来学习，得到的模型的预测结果容易出现皱纹和尖锐的突出。这可以从Xipeng的回归实验可以看出来。（However, each representation has associated drawbacks for body shape prediction: e.g. voxels are limited by the resolution of the voxel grid and direct mesh predictions can result in surface artifacts such as wrinkles and sharp protrusions）<br><br>
+
+      Learning-based方法的第二类是人物模型有参回归。什么意思呢？经过别人的统计建模，人类身体可以用96个参数表达就行了，这就是经典的SMPL模型。同样的，人脸也有一个现有的统计模型。既然如此，SMPL就是一个很强的先验了。有了这个先验，一切就好办了。我们只需要对输入，预测96个参数不就可以了吗？确实如此。进一步地，deep learning网络的输入可以采取两种策略。一种是采用上面提到的proxy representation，即采用轮廓和关节点作为网络的输入。另一种是采用原图来做输入。本文采用的是第一种，即proxy representation，原因前面也已经讨论，这样会有更好的泛化性。(Body model parameter regression involves predicting the parameters of a statistical body model, such as SMPL [20], which provides a useful prior over body shape. Several approaches first predict a proxy representation from the input RGB image, such as surface keypoints [17, 24], silhouettes [24, 27], body part segmentations [22] or IUV maps [32, 34], and use this representation as the input to a regressor. Other approaches directly predict body model parameters from the input image [8, 15, 26].)<br><br>
+
+
+      总的来说，我们当然希望learning-based的方法来替换掉optimization-based的方法。不过呢，learning-based的方法需要有大量的训练数据。本文巧妙地采用随机采样合成数据，这样就可以用大把数据了。（Fundamentally, learning-based approaches are dependent on the label accuracy and sample diversity of the training datasets used. This results in a significant drawback when the training data distribution is not sufficiently diverse in terms of body shape, pose and image (e.g. background) conditions, as discussed below）<br><br>
+
+      方法：<br>
+      首先介绍带参3D模型SMPL。每96维的向量都可以对应一个人体的3D vertex mesh。这个96维的向量记为(\beta, \theta)。\beta与人体的3D形状有关。\theta与人体的姿势（即关节点）有关。总之，每96维的向量都可以对应一个人体的3D vertex mesh。<br><br>
+
+      获取合成数据。每个迭代，都随机产生一个96维的向量，即可根据SMPL模型得到一个3D的人。同时 采样一个相机平移参数+固定的内参（A camera translation vector t is sampled randomly, while camera intrinsics and rotation matrices, K and R, are fixed），这样就可以把这个3D的人渲染或者投影成2D image。为了改变人的形状，不同的\beta可以按加随机高斯噪声获得。本来的话，我们应该用分割模型和关节点检测模型提取这个2D图像的轮廓及关节点。但是，基于pytorch3D，我们可以直接在渲染或投影到2D的过程，一步到位，直接获得其轮廓和关节点。然后我们把轮廓图和关节点图concat在一块，作为网络模型的输入。注意到，轮廓图显然是一个图，而关节点的话，每个关节点都是一个高斯map，例如我们有24个关节点，则我们有24上gaussian map。我们把轮廓图和这24个高斯map concat，作为网络的输入（即proxy representation），我们会对这个proxy representation进行data augmentation。augmentation策略有加入随机噪声，或者随机遮挡。<br><br>
+
+      网络结构。首先输入proxy representation，进入resnet-18中，然后，得到512维的特征，进入mlp（即regressor）中，输出形状参数\beta，姿势参数\theta，以及相机参数p（为了理解方便，这个大家可忽略）。由于我们的2D图像是采样（\beta, \theta，p）利用SMPL模型得到3D结果后渲染成2D得到的，故我们直接有\beta，\theta的监督信息。这里可以构建两个mse损失函数L_\beta, L_\theta。<br><br>
+
+      然后，由预测的\beta和\theta，我们可以得用SMPL模型得到预测的3D vertex，因此，我们在3D vertex mesh上，可以构建vertex的损失函数L_v和3D关节点的损失L_j3D。作者指出，这两个3D的Loss与L_\beta, L_\theta有冗余。但是作者同时指出，这样的冗余对训练模型有帮助。<br><br>
+
+      然后，这个预测3D结果，渲染或者投影回2D，可以得到2D上的结果，例如2D的关节点。这篇文章直接用这个2D的关节点来构建损失L_j2D。我认为是不够的。应该把2D的轮廓损失加上最好。<br><br>
+
+      最后，这篇文章的总的损失为：a*L_beta + b* L_theta + c*L_v + d*L_j3D + e*Lj2D + log(1/(abcde))，最后一项是正则项。<br><br>
+
+      实现细节：<br>
+      首先是全成数据的细节。虽然96给的参数向量是随机采样的。但也不能没有约束的采样，不然出来就不是人体的，尤其是pose参数\theta。因此，这些pose参数是从现有的人物数据集中统计，再进行采样。（To generate synthetic training data, we sample SMPL pose parameters from the training sets of UP-3D [17] and 3DPW [30], and from Human3.6M [7] subjects S1, S5, S6, S7 and S8 (after applying MoSh [19] to obtain SMPL poses from 3D joint labels).）<br><br>
+
+      网络结构细节。使用的网络结果是resnet-18，其最终输出是一个512维的特征。这个512维的向量，被输入到一个mlp的回归器中。mlp是2层的全连接网络，隐层的维度是512维。<br><br>
+
+
+      作者使用的是Adam优化器，学习率为万分之一。指为140。训练epoch为240。使用的GPU仅为单卡2080Ti。训练时间为5天。所以，训练代价还是非常低的。(We use the Adam [12] optimiser to train our encoder and regressor, with a learning rate of 0.0001 and a batch size of 140. We train for 240 epochs, which takes 5 days on a single 2080Ti GPU_
+
+
+       <br><br>
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+              <div align="center">
+                <span itemprop="name"><font size="5">Adversarial Weight Perturbation Helps Robust Generalization -- 一种提高鲁棒性泛化能力方法</font> </span>
+              </div>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+
+        这是一篇关于对抗鲁棒性的文章。<br><br>
+
+        众所周知，神经网络（更广泛一点来说，现有的机器学习模型都）存在这样一个问题，容易受到攻击。也就是，一个加入一些特殊设计的噪声（如在loss前加一个负号，然后把梯度BP到图像上），形成对抗样本，这些对抗样本轻松使得模型预测错误。<br><br>
+
+        为了使模型健壮鲁棒、不那么容易被攻击。一种直观的想法是，把这些对抗样本也加进训练集中进行训练。这就是非常出名的对抗训练技术(adversarial training, AT)。AT是现在为止，最成功的使网络鲁棒的方法，没有之一。<br><br>
+
+        但是AT也有一些缺点。例如，我们都知道，这些对抗样本需要在每个迭代中，用对抗攻击生成。而对抗攻击生成对抗样本是需要时间的。每个迭代都要产生对抗样本，使得AT的时间成本特别高。没几个人爱玩AT。<br><br>
+
+        除了时间成本大之外，AT还有另一个缺点，就是泛化性。我们用AT训练一个模型，在训练集上，可以做到有效的抵御攻击性（也就是训练集上，对抗样本几乎不能使模型预测错误，依然能保持90%的识别精度）。但是在验证集上，对抗样本还是能使模型预测出错，平均识别精度掉成40%。这是非常奇怪的。我们知道，标准非AT训练的泛化误差不会这么低。标准非AT训练的训练集精度和验证集精度差距不会这么大。<br><br>
+
+        那怎么提高AT的泛化能力呢？大家还记得我写的博客https://wanggrun.github.io/projects/fast/fast019和https://wanggrun.github.io/projects/fast/fast020里面，使用SAM优化器能大大提高模型的泛化能力。这篇文章正是用了SAM优化器的思路。<br><br>
+
+        让我们回顾一下SAM。SAM是基于一个loss landscape来做的。意思是说，当我们训练好一个模型之后，得到优化好的W*，同时得到的W*的邻域Neighbour(W*)。然后把W*和Neighbour(W*)的loss全部画出来。<br><br>
+
+        具体实现时，由于我们可视化只能可视化2维空间。我们随机选取W*的两维出来，记做w1*维和w2*维，其它维度保持不变。刚把[w1*- eps : w1* + eps, w2*- eps : w2* + eps, w3*, w4*, ... wd*]的loss全部plot出来，如果损失是平滑的碗状，如https://wanggrun.github.io/projects/fast/fast019中的图1(a)(d)(e)，则这种模型的泛化能力非常强。如果是尖的，如https://wanggrun.github.io/projects/fast/fast019中的图1(b)(c)，则泛化能力非常差。那么，怎么使得landscape平滑如碗状呢？就是在训练的时候，给W加一个噪声（也是对抗噪声），使得不仅是W*的loss低，而且W*的周围的的所有点的loss也要低。<br><br>
+
+        好啦。本文的主要idea已经讲完了，总结起来就是AT+SAM的结合体。不过值得大家注意的是，如果在你的某些实验中，若遇到训练精度非常高，而验证精度低的离谱。你也可以试下SAM优化器哦。SAM优化器的介绍在https://wanggrun.github.io/projects/fast/fast020中。
+
+
+       <br><br>
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
