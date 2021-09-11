@@ -2,23 +2,23 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>DDL of leading AI conferences in 2021</title>
+<title>DDL of leading AI conferences in 2022</title>
 </head>
 <body>
 <DIV id="CountMsg" class="HotDate">
 <span id="year">00Year</span>
-<span id="t_d_ijcai_abstract">00Day</span>
-<span id="t_h_ijcai_abstract">00Hour</span>
-<span id="t_m_ijcai_abstract">00Minute</span>
-<span id="t_s_ijcai_abstract">00Second</span>
-<span id="t_d_ijcai_paper">00Day</span>
-<span id="t_h_ijcai_paper">00Hour</span>
-<span id="t_m_ijcai_paper">00Minute</span>
-<span id="t_s_ijcai_paper">00Second</span>
-<span id="t_d_cvpr_rebuttal">00Day</span>
-<span id="t_h_cvpr_rebuttal">00Hour</span>
-<span id="t_m_cvpr_rebuttal">00Minute</span>
-<span id="t_s_cvpr_rebuttal">00Second</span>
+<span id="t_d_cvpr2022_abstract">00Day</span>
+<span id="t_h_cvpr2022_abstract">00Hour</span>
+<span id="t_m_cvpr2022_abstract">00Minute</span>
+<span id="t_s_cvpr2022_abstract">00Second</span>
+<span id="t_d_cvpr2022_paper">00Day</span>
+<span id="t_h_cvpr2022_paper">00Hour</span>
+<span id="t_m_cvpr2022_paper">00Minute</span>
+<span id="t_s_cvpr2022_paper">00Second</span>
+<span id="t_d_guokao">00Day</span>
+<span id="t_h_guokao">00Hour</span>
+<span id="t_m_guokao">00Minute</span>
+<span id="t_s_guokao">00Second</span>
 <span id="t_d_acl_abstract">00Day</span>
 <span id="t_h_acl_abstract">00Hour</span>
 <span id="t_m_acl_abstract">00Minute</span>
@@ -71,9 +71,9 @@
 function getRTime(){
 var year = 2021
 document.getElementById("year").innerHTML = "DDL of leading AI conferences in " + year + " Year:"+ "<br>" + "<br>";
-//IJCAI 2021 Abstract 
-task = "_ijcai_abstract"
-var EndTime= new Date('2021/01/14 19:59:59'); //截止时间
+//CVPR2022 Abstract 
+task = "_cvpr2022_abstract"
+var EndTime= new Date('2022/11/09 19:59:59'); //截止时间
 var NowTime = new Date();
 var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
@@ -87,11 +87,11 @@ var sec = Math.max(0,Math.floor(t/1000%60));
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second,    IJCAI 2021 Abstract" + ";<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    CVPR 2022 Abstract" + ";<br>";
 
-//IJCAI 2021 paper 
-task = "_ijcai_paper"
-var EndTime= new Date('2021/01/21 19:59:59'); //截止时间
+//CVPR 2022 paper 
+task = "_cvpr2022_paper"
+var EndTime= new Date('2022/11/16 19:59:59'); //截止时间
 var NowTime = new Date();
 var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
@@ -105,12 +105,12 @@ var sec = Math.max(0,Math.floor(t/1000%60));
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_h"+task).innerHTML = hour + " Hour";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
-document.getElementById("t_s"+task).innerHTML = sec + " Second,    IJCAI 2021 paper" + ";<br>" + "<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    CVPR 2022 paper" + ";<br>" + "<br>";
 
 
 
-//CVPR 2021 Rebuttal
-var EndTime= new Date('2021/01/26 15:59:59'); //截止时间
+//Guo Kao
+var EndTime= new Date('2022/11/28 15:59:59'); //截止时间
 var NowTime = new Date();
 var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
@@ -121,7 +121,7 @@ var hour = Math.max(0,Math.floor(t/1000/60/60%24));
 var min = Math.max(0,Math.floor(t/1000/60%60));
 var sec = Math.max(0,Math.floor(t/1000%60));
 
-task = "_cvpr_rebuttal"
+task = "_guokao"
 document.getElementById("t_d"+task).innerHTML = day + " Day";
 document.getElementById("t_d"+task).style.color="red";
 document.getElementById("t_d"+task).style.fontWeight = "bold";
@@ -131,7 +131,7 @@ document.getElementById("t_h"+task).style.fontWeight = "bold";
 document.getElementById("t_m"+task).innerHTML = min + " Minute";
 document.getElementById("t_m"+task).style.color="red";
 document.getElementById("t_m"+task).style.fontWeight = "bold";
-document.getElementById("t_s"+task).innerHTML = sec + " Second,    CVPR 2021 Rebuttal" + ";<br>" + "<br>";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    国考2022" + ";<br>" + "<br>";
 document.getElementById("t_s"+task).style.color="red";
 document.getElementById("t_s"+task).style.fontWeight = "bold";
 
