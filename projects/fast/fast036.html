@@ -49,50 +49,50 @@ a, a:visited { color : #0050e7; }
     <div class="title">
             <h1>
               <div align="center">
-                <span itemprop="name"><font size="5">Reading a “Science” paper: predicting RNA -- 阅读Science论文：预测RNA</font> </span>
+                <span itemprop="name"><font size="5">3D Point Could Generation Based on Denoising Diffusion Probabilistic Models<br基于扩散概率模型(一种与GAN平行)的3D点云的生成></font> </span>
               </div>
             </h1>
     </div>
     <div class="container">
       <p>
 
-      论文题目：Geometric deep learning of RNA structure<br>
-      论文地址：https://onlinelibrary.wiley.com/doi/10.1002/prot.26033<br>
-      本文的完成单位是斯坦福大学。<br><br>
+      论文题目： Diffusion Probabilistic Models for 3D Point Cloud Generation<br>
+      论文地址：https://arxiv.org/pdf/2103.01458.pdf<br>
+      代码地址：https://github.com/luost26/diffusion-point-cloud/tree/main<br><br>
 
-      我们的博客已经介绍过几篇预测人类蛋白质结构的论文。今天给大家介绍的这篇论文是预测RNA的结构。（注：值得注意的是，据我读过的文章，很多生物领域在做的事情，都是在做3D结构的预测。包括3D结构的重建。只不过有些表面是3D结构的预测问题，实际可以formulate成普通回归问题。不管怎么，3D视觉真的是未来视觉中的重要方向。)<br><br>
 
-      摘要：<br>
-      在结构生物学中，人们认为，分子的结构与其功能极其相关（甚至结构决定功能），同时，了解分子的结构，对药物的发现，也有重大的意义（例如新冠疫苗的发现）。所以，如何得到不同分子的结构，是一件十分重要的事实。本文中所研究的RNA，亦是如此。获取RNA的三维结构，是十分有意义的。如何预测一个RNA的结构，十分具有挑战性。本文使用机器学习模型做到了这点。值得注意的是，我们只用了18种RNA结构来做训练集，就可以取得SOTA的结果。针对小样本学习，我们新颖的神经网络也克服了传统神经网络需要大量训练数据的局限性。因于训练数据只以原子坐标作为输入，不包含特定于 RNA 的信息，所以可以推广到生物、化学、材料科学等多个领域（注：这一点与我们的3D人物重建一样，只用轮廓和关节点作为输入而不是照片，这样就有很好的推广性，参见https://wanggrun.github.io/projects/fast/fast033）。<br><br>
+      Diffusion Probabilistic Models（扩散概率模型）是一种生成模型。我们知道，最典型的生成模型是GAN，VAE和flow。扩散模型是一种新的生成模型。它在paper with code上，取得了很高的性能。被作者鼓吹是一种可以替代GAN的模型（注：我持怀疑态度。因为DPM模型太复杂了。且测试的时候需要迭代太多次，不优雅）。<br><br>
 
-      正文：<br>
-      RNA与蛋白质一样，有重大的作用，例如在预测基因表达、调节先天免疫、感知小分子等方面。了解RNA的结构极其重要，例如有利于我们理解RNA功能机理、设计合成 RNA，并发现 RNA 靶向药物。相比人们对蛋白质的研究和了解，我们在了解RNA结构方面，还有很大的不足。人们对RNA的需求量是蛋白质的30倍，但是人们知道的RNA还没有蛋白质的1%。因此，了解RNA的3维结构是很有意义的。<br><br>
+      扩散模型是什么意思呢？我们知道，东西在空气中，追随熵增大原理，会扩散变无序。例如，我们有一个椅子，如果放在空气中，长达数百年。这个椅子就会腐蚀成一个高斯噪声了。如果我们能学习到腐蚀的过程。那么，我们逆回去。就可以把一个高斯噪声变成一个椅子。这就是利用扩散模型进行点云（或图像）的生成过程。<br><br>
 
-      过去几十的研究表明，预测RNA的3维结构比预测蛋白质还难。原因是RNA的结构模板比较少，且信息量不足。<br><br>
+      和condition gan一样，这个文章也想用condition。它先对某个shape提了一个shape latent作为条件（注：这个条件是指类别条件还是点云条件？如果是前者，那么，例如我只需要提一个飞机类别，就可以生成一个飞机的点云。如果是后者，我需要输入一个飞机的点云，然后输出是这个输入的点云的一个风格变换后的点云。读完后文，我发现这个条件十分不优雅，甚至有点鸡生蛋和蛋生鸡的矛盾。）<br><br>
 
-      这产生了一个问题：是否可以用已知的RNA结构来预测未知的RNA结构（它们大多和已经的RN结构无关）。这看起来就是一个很难的domain adaptation问题。也即，迁移能力是否够？这导致了机器学习中的两大难题：（1）由于存在gap，应该避免一些不靠谱的假设。（2）从有限的训练数据中进行学习。<br><br>
+      相关文献
+      点云的生成。由于我重点想关注本文的方法而非点云生成本身。关于点云生成的参考文献我直接略过。<br><br>
 
-      为了解决上述挑战，我们搭建了一个神经网络。输入RNA的原子，预测每个原子的(delta x, delta y, delta z)坐标（可能还加一个旋转量？），使用MSE损失函数来训练。<br><br>
+      扩散概率模型。我前面已经讲了，扩散模型就是，如果我们有一个点云，我t0时刻是点云本身，t1时刻它扩散了一上，t2时刻进一步扩散。走到tn时刻变成高斯噪声。这整个过程可以看成是一个可尔科夫过程。我们只要逆回去，就可以用一个高斯噪声生成一个点云。本文评论到，现有的扩散模型多用于无条件生成，就随便用一个噪声，就可以生成一个目标。而本文首次做了condiction 扩散模型。（注：这就是是GAN到condiction GAN的改进吗？读完后文，我发现这个条件十分不优雅，甚至有点鸡生蛋和蛋生鸡的矛盾。）<br><br>
 
-      在这个模型中，没有加入任何RNA的特殊特征，例如没有没有先入为主的双重概念螺旋、碱基对、核苷酸或氢键，这就使得本文的方法可以适用于任何的分子结构预测。具有通用性。<br><br>
+      方法<br>
+      以下要讲述本文的方法了。在开始讲之前，请大家先了解一件事：王广聪博士曾经说过，大家在学习VAE之前，先不要看论文里面的formulation（或者VAE的formulation定义），而是先读训练和测试算法框图或者代码。这句话真是让我受用终身。原因是什么呢？就是VAE的数学formulation太优雅了，以至于你读算法或才代码的时候会发现，定义中的formulation和真正的实现根本就是两个东西。如果只看算法，就会发现VAE是一个无比庸俗简单的东西，却被formulate成高深莫测的东西。并且，formuation之后还会多一段话，说"To make the training simpler and more efficient, following [11], instead of evaluating the expectation of the whole summation over all the time steps in Eq. (9), we balabalabala...”，后面就开始说真正的实现和formulation不一致的地方。我有时候对这种过度formulation较为反感。而扩散模型正是和VAE一样，存在过度formulation现象。<br><br>
 
-      网络的输入也非常简单，仅仅是每个原子的 3D 坐标(x0, y0, z0)和化学元素类型。<br><br>
+      本文的扩散模型是一个条件扩散模型（注：这个条件用的不是很优雅）。首先请看下面的示意：<br><br>
 
-      在这个模型设计中，充分考虑了每一层都是旋转和平移等变的——也就是说，其输入的旋转或平移会导致其输出的相应变换。<br><br>
+      (x_T, x_0 -> z) -> … -> (x_t, z) -> (x_{t-1}, z) -> … -> x_0 <br><br>
 
-      在这个模型设计中，对每一层来说，是局部连接的，但是通过堆叠多层，可以达到全局信息交互（注：这就是类似于CNN的性质吗？）。<br><br>
+      (x_0, z -> x_0) -> … -> (x_{t-1}, z) -> (x_t, z) -> … -> (x_T, z) <br><br>
 
-      为了训练这个网络，我们利用了18种RNA分子，这些分子结构是在1994年到2006年之间发现的。由于样本过少，我们使用了数据增强。我们随机地将每个RNA利用上次那篇Science所用的数据增强方法（Rosetta FARFAR2 sampling method），为每个RNA分子得到1000个样本。然后用这18000个数据进行训练（注：训练过程应该还是会在线data augmentation的吧，不然我认为存在过拟合的风险）。因为这18000个样本是Data augmentation得到的，所以作者说他们没有用到已知的结构（注：我觉得这篇文章的写作有点不专业，对于机器学习的人来说。augmentaiton就算是没有用到已经结构了吗？CNN还需要用一段介绍局部性与全局性的关系吗？多层网络需要花这么多笔墨写吗？）<br><br>
+      为了利于理解，先讲inference阶段。在此阶段，我们输入的是一个高斯噪声x_T+一个条件z。这里有点不太合理的是，我们需要先将一个图输入到encode中得到这个条件z。这就好比说，为了生成飞机的点云。我们先要将一个飞机点云x_0输入到一个encode中，得到条件z。然后这个z和x_T一块，迭代T次，最终生成飞机的点云x_0。这就有一个鸡生蛋和蛋生鸡的矛盾了。如果我事先有一个飞机的点云了，我还要再生一个做什么？当然，这是符合条件生成器的定义的。有时候我们输入一个低分辨率的点云，想生成一个高分辨率的点云。或者我们需要做image-to-image tranlation或者风格转换。输入高斯噪声x_T+条件z，我们输入一个net中，预测一个e_theta，然后用这个e_theta采样（相乘），得到x_{T-1}（注：见代码e_theta = self. net(x_t, beta=beta, context=context)； x_next = c0 * (x_t - c1 * e_theta) + sigma * z）。然后反复迭代，得到x_{t}, 继续得到x_{t-1},最终得到x_0，这就是我们的输出。具体参见此行代码：https://github.com/luost26/diffusion-point-cloud/blob/cde2e501855dea31496ddffad16f40aa588e3af8/models/diffusion.py#L137<br><br>
 
-      为了验证本文方法的有效性。作者也构建了一个新的、更大的RNA结构测试集。<br><br>
 
-      以往也已经有一些深度学习的方法进入结构预测和量子化学领域，例如蛋白质结构预测和其他领域。本文与现有文献的不同在于：（1）本文没有像以往的工作那样，有相关reference序列。(2)不需要额外的哪些结构特征重要的先验信息和假设。<br><br>
+      接下来向大家介绍训练阶段。在训练阶段，我们也是先用x_0输入encoder得到z，然后用x_0采样噪声（即扩散）得到x_1，x_1得到x_1，如此，最终得到x_T，即x_0 -> x_1 -> x_2 -> x_3 … -> x_T（注：在本文的训练代码中，实现并非迭代采样。只x_0可直接采样x_t。只要得到一个恰当的采样就可以一步到位。因为高斯采样有叠加性质）。但是，在训练的时候，需要保证测试的时候扩散能逆回去。即保证：x_T -> x_{T-1} -> … -> x_2 -> x_1。由于 e_theta = self. net(x_t, beta=beta, context=context)； x_next = c0 * (x_t - c1 * e_theta) + sigma * z）。我们只需要保证e_theta为标准高斯分布即可。因此，训练时，随机采样一个时间 t \in [0, T]，使得e_theta = self. net(x_t, beta=beta, context=z) 与标准高斯分布的mse loss最小化。这就是训练过程。具体参见此行代码：https://github.com/luost26/diffusion-point-cloud/blob/cde2e501855dea31496ddffad16f40aa588e3af8/models/diffusion.py#L118。至于说，为什么e_theta = self. net(x_t, beta=beta, context=z) 与标准高斯分布的mse loss最小化可以保证可逆，这也许是DDPM的性质之一。这就好比为什么kld loss能使VAE的code落在N（0，1）分布一样。<br><br>
 
-      本文实验中用到的测试集很有挑战性。测试集的序列长度远长于训练集。这和蛋白质那两篇文章一样。<br><br>
+      对于Test VAE来说，还是需要输入一个点云，才能生成一个点云的（注：即所谓的条件生成器）。请见：https://github.com/luost26/diffusion-point-cloud/blob/cde2e501855dea31496ddffad16f40aa588e3af8/test_ae.py#L61<br><br>
 
-      本文的不足之处在于，现在从18种RNA采样18000个结构用的是现有的先验知识。将来可以使用automl技术来进行搜索最优采样策略。<br><br>
+      所以，对于本文的方法来说，实在是一个包装。要从噪声来生成一个点云，本文的扩散模型根本做不到。为了生成点去，它需要借助于传统的VAE模型（或者说需要借助kld loss）或Flow模型（或者说flow的loss）。请参见：<br>
+      对VAE的需要见：https://github.com/luost26/diffusion-point-cloud/blob/cde2e501855dea31496ddffad16f40aa588e3af8/train_gen.py#L104 和https://github.com/luost26/diffusion-point-cloud/blob/cde2e501855dea31496ddffad16f40aa588e3af8/models/vae_gaussian.py#L39；<br>
+      对Flow的需要见：https://github.com/luost26/diffusion-point-cloud/blob/cde2e501855dea31496ddffad16f40aa588e3af8/train_gen.py#L106和https://github.com/luost26/diffusion-point-cloud/blob/cde2e501855dea31496ddffad16f40aa588e3af8/models/vae_flow.py#L52。<br><br>
 
-      本文这种小样本学习将大有用处。除了结构预测，可能包括分子设计（均用于大分子例如蛋白质或核酸和小分子药物），纳米粒子半导体的电磁特性估计，以及机械特性和其他材料的合金预测。
+      综上。本文虽然提出来用扩散概率模型来生成点云。实际上生不出来。它需要加VAE的kld loss或者Flow模型某些loss。与VAE不同之处在于，VAE的decoder是仅访问一次decoding net一次的，在DDPM变成一个多次迭代访问一个net了。
 
 
        <br><br>
