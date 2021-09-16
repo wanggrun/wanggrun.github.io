@@ -49,7 +49,7 @@ a, a:visited { color : #0050e7; }
     <div class="title">
             <h1>
               <div align="center">
-                <span itemprop="name"><font size="5">3D Point Could Generation Based on Denoising Diffusion Probabilistic Models<br基于扩散概率模型(一种与GAN平行)的3D点云的生成></font> </span>
+                <span itemprop="name"><font size="5">3D Point Could Generation Based on Denoising Diffusion Probabilistic Models<br>基于扩散概率模型(一种与GAN平行)的3D点云的生成</font> </span>
               </div>
             </h1>
     </div>
@@ -73,7 +73,7 @@ a, a:visited { color : #0050e7; }
       扩散概率模型。我前面已经讲了，扩散模型就是，如果我们有一个点云，我t0时刻是点云本身，t1时刻它扩散了一上，t2时刻进一步扩散。走到tn时刻变成高斯噪声。这整个过程可以看成是一个可尔科夫过程。我们只要逆回去，就可以用一个高斯噪声生成一个点云。本文评论到，现有的扩散模型多用于无条件生成，就随便用一个噪声，就可以生成一个目标。而本文首次做了condiction 扩散模型。（注：这就是是GAN到condiction GAN的改进吗？读完后文，我发现这个条件十分不优雅，甚至有点鸡生蛋和蛋生鸡的矛盾。）<br><br>
 
       方法<br>
-      以下要讲述本文的方法了。在开始讲之前，请大家先了解一件事：王广聪博士曾经说过，大家在学习VAE之前，先不要看论文里面的formulation（或者VAE的formulation定义），而是先读训练和测试算法框图或者代码。这句话真是让我受用终身。原因是什么呢？就是VAE的数学formulation太优雅了，以至于你读算法或才代码的时候会发现，定义中的formulation和真正的实现根本就是两个东西。如果只看算法，就会发现VAE是一个无比庸俗简单的东西，却被formulate成高深莫测的东西。并且，formuation之后还会多一段话，说"To make the training simpler and more efficient, following [11], instead of evaluating the expectation of the whole summation over all the time steps in Eq. (9), we balabalabala...”，后面就开始说真正的实现和formulation不一致的地方。我有时候对这种过度formulation较为反感。而扩散模型正是和VAE一样，存在过度formulation现象。<br><br>
+      以下要讲述本文的方法了。在开始讲之前，请大家先了解一件事：王广聪博士曾经说过，大家在学习VAE之前，先不要看论文里面的formulation（或者VAE的formulation定义），而是先读训练和测试算法框图或者代码。这句话真是让我受用终身。原因是什么呢？就是VAE的数学formulation太优雅了，以至于你读算法或才代码的时候会发现，定义中的formulation和真正的实现根本就是两个东西。如果只看算法，就会发现VAE是一个无比庸俗简单的东西，却被formulate成高深莫测的东西。并且，formuation之后还会多一段话，说"To make the training simpler and more efficient, following [11], instead of evaluating the expectation of the whole summation over all the time steps in Eq. (9), we balabalabala...”，后面就开始说真正的实现和formulation不一致的地方。我有时候对这种过度formulation不太喜欢。而扩散模型正是和VAE一样，存在过度formulation现象。<br><br>
 
       本文的扩散模型是一个条件扩散模型（注：这个条件用的不是很优雅）。首先请看下面的示意：<br><br>
 
