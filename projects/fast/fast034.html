@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+              <div align="center">
+                <span itemprop="name"><font size="5">Improving Adversarial Robustness by Discretization -- 通过离散化提高网络鲁棒性</font> </span>
+              </div>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+
+      论文题目：Improved Adversarial Robustness by Reducing Open Space Risk via Tent Activations<br>
+      论文地址：https://arxiv.org/pdf/1908.02435.pdf<br>
+      论文题目：Thermometer encoding: One hot way to resist adversarial examples<br>
+      论文地址：https://openreview.net/pdf?id=S18Su--CW<br><br>
+
+
+      --------------------------<br>
+      论文题目：Improved Adversarial Robustness by Reducing Open Space Risk via Tent Activations<br>
+      论文地址：https://arxiv.org/pdf/1908.02435.pdf<br><br>
+
+      摘要：通过离散化，这篇文章把CIFAR-10上的robust accuracy从对抗训练的41.8%提升到73.5%。（这个我是持怀疑态度的。请看https://github.com/MadryLab/robustness）。<br><br>
+
+      这篇文章的motivation是：当输入远离训练时样本，来自未知分布的风险增加。所以，应该抑制输入远离训练样本这种情况。而这篇文章想到的方法是，使用一个新的激活函数。例如，使用一个帐篷激活函数替换ReLU函数。<br><br>
+
+      关于攻击的超参数设置：the adversary is limited to 7 iterations, the maximum l∞ of perturbations is 0.032 (= 8.16 in [0, 255] pixel-value range) while the step-size for iterations is set to 0.008. As before, for evaluation, we use the default settings of ART, however, we change the l∞ limit for perturbations to 0.032 and the step-size to 0.008 for applicable adversaries.<br><br>
+
+      在这个参数下：https://github.com/MadryLab/robustness的结果为53.49% / 53.29%。不过网络结构与本文作者所用的网络结构不一致 。如果用作者的网络，说不过更高。<br><br>
+
+      不过，总体来说，这个文章的性能确实不错。不知为会没有什么人follow。好像也是从2019年放Arxiv之后（似乎投的是neurip没中），再也没有发表。<br><br>
+
+      -----------------------------------<br>
+      论文题目：Thermometer encoding: One hot way to resist adversarial examples<br>
+      论文地址：https://openreview.net/pdf?id=S18Su--CW<br><br>
+
+      文章发表在iclr上。这个正是一个有趣的离散化。<br><br>
+
+      普通离散化：[0, 0.1] -> 0.1; [0.1, 0.2] -> 0.2, …, [0.9, 1.0] -> 1.0 <br>
+      One hot离散化，[0, 0.1] -> 1000000000，  [0.1, 0.2] -> 0100000000, …,[0.9, 1.0] -> 000000001 <br>
+      温度计离散化：[0, 0.1] -> 011111111，  [0.1, 0.2] -> 0011111111, …,[0.9, 1.0] -> 1111111111，也就是大于这个位置的全为1.<br><br>
+
+      这个文章和上述帐篷激活函数效果非常不错。<br><br>
+
+      但是icml 2018 best paper: Obfuscated Gradients Give a False Sense of Security: Circumventing Defenses to Adversarial Examples指出，只有用恰当的连续函数来替换离散函数。这一切都可以被攻击。这个best paper一口气攻击了好多个方法。包括本文的温度计离散化方法。
+
+
+       <br><br>
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
