@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+              <div align="center">
+                <span itemprop="name"><font size="5">Reading a “Science” paper: predicting RNA -- 阅读Science论文：预测RNA</font> </span>
+              </div>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+
+      论文题目：Geometric deep learning of RNA structure<br>
+      论文地址：https://onlinelibrary.wiley.com/doi/10.1002/prot.26033<br>
+      本文的完成单位是斯坦福大学。<br><br>
+
+      我们的博客已经介绍过几篇预测人类蛋白质结构的论文。今天给大家介绍的这篇论文是预测RNA的结构。（注：值得注意的是，据我读过的文章，很多生物领域在做的事情，都是在做3D结构的预测。包括3D结构的重建。只不过有些表面是3D结构的预测问题，实际可以formulate成普通回归问题。不管怎么，3D视觉真的是未来视觉中的重要方向。)<br><br>
+
+      摘要：<br>
+      在结构生物学中，人们认为，分子的结构与其功能极其相关（甚至结构决定功能），同时，了解分子的结构，对药物的发现，也有重大的意义（例如新冠疫苗的发现）。所以，如何得到不同分子的结构，是一件十分重要的事实。本文中所研究的RNA，亦是如此。获取RNA的三维结构，是十分有意义的。如何预测一个RNA的结构，十分具有挑战性。本文使用机器学习模型做到了这点。值得注意的是，我们只用了18种RNA结构来做训练集，就可以取得SOTA的结果。针对小样本学习，我们新颖的神经网络也克服了传统神经网络需要大量训练数据的局限性。因于训练数据只以原子坐标作为输入，不包含特定于 RNA 的信息，所以可以推广到生物、化学、材料科学等多个领域（注：这一点与我们的3D人物重建一样，只用轮廓和关节点作为输入而不是照片，这样就有很好的推广性，参见https://wanggrun.github.io/projects/fast/fast033）。<br><br>
+
+      正文：<br>
+      RNA与蛋白质一样，有重大的作用，例如在预测基因表达、调节先天免疫、感知小分子等方面。了解RNA的结构极其重要，例如有利于我们理解RNA功能机理、设计合成 RNA，并发现 RNA 靶向药物。相比人们对蛋白质的研究和了解，我们在了解RNA结构方面，还有很大的不足。人们对RNA的需求量是蛋白质的30倍，但是人们知道的RNA还没有蛋白质的1%。因此，了解RNA的3维结构是很有意义的。<br><br>
+
+      过去几十的研究表明，预测RNA的3维结构比预测蛋白质还难。原因是RNA的结构模板比较少，且信息量不足。<br><br>
+
+      这产生了一个问题：是否可以用已知的RNA结构来预测未知的RNA结构（它们大多和已经的RN结构无关）。这看起来就是一个很难的domain adaptation问题。也即，迁移能力是否够？这导致了机器学习中的两大难题：（1）由于存在gap，应该避免一些不靠谱的假设。（2）从有限的训练数据中进行学习。<br><br>
+
+      为了解决上述挑战，我们搭建了一个神经网络。输入RNA的原子，预测每个原子的(delta x, delta y, delta z)坐标（可能还加一个旋转量？），使用MSE损失函数来训练。<br><br>
+
+      在这个模型中，没有加入任何RNA的特殊特征，例如没有没有先入为主的双重概念螺旋、碱基对、核苷酸或氢键，这就使得本文的方法可以适用于任何的分子结构预测。具有通用性。<br><br>
+
+      网络的输入也非常简单，仅仅是每个原子的 3D 坐标(x0, y0, z0)和化学元素类型。<br><br>
+
+      在这个模型设计中，充分考虑了每一层都是旋转和平移等变的——也就是说，其输入的旋转或平移会导致其输出的相应变换。<br><br>
+
+      在这个模型设计中，对每一层来说，是局部连接的，但是通过堆叠多层，可以达到全局信息交互（注：这就是类似于CNN的性质吗？）。<br><br>
+
+      为了训练这个网络，我们利用了18种RNA分子，这些分子结构是在1994年到2006年之间发现的。由于样本过少，我们使用了数据增强。我们随机地将每个RNA利用上次那篇Science所用的数据增强方法（Rosetta FARFAR2 sampling method），为每个RNA分子得到1000个样本。然后用这18000个数据进行训练（注：训练过程应该还是会在线data augmentation的吧，不然我认为存在过拟合的风险）。因为这18000个样本是Data augmentation得到的，所以作者说他们没有用到已知的结构（注：我觉得这篇文章的写作有点不专业，对于机器学习的人来说。augmentaiton就算是没有用到已经结构了吗？CNN还需要用一段介绍局部性与全局性的关系吗？多层网络需要花这么多笔墨写吗？）<br><br>
+
+      为了验证本文方法的有效性。作者也构建了一个新的、更大的RNA结构测试集。<br><br>
+
+      以往也已经有一些深度学习的方法进入结构预测和量子化学领域，例如蛋白质结构预测和其他领域。本文与现有文献的不同在于：（1）本文没有像以往的工作那样，有相关reference序列。(2)不需要额外的哪些结构特征重要的先验信息和假设。<br><br>
+
+      本文实验中用到的测试集很有挑战性。测试集的序列长度远长于训练集。这和蛋白质那两篇文章一样。<br><br>
+
+      本文的不足之处在于，现在从18种RNA采样18000个结构用的是现有的先验知识。将来可以使用automl技术来进行搜索最优采样策略。<br><br>
+
+      本文这种小样本学习将大有用处。除了结构预测，可能包括分子设计（均用于大分子例如蛋白质或核酸和小分子药物），纳米粒子半导体的电磁特性估计，以及机械特性和其他材料的合金预测。
+
+
+       <br><br>
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
