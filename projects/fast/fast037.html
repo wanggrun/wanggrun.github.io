@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+              <div align="center">
+                <span itemprop="name"><font size="5">3D human reconstruction from videos<br>从视频进行人物3D重构</font> </span>
+              </div>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+
+      论文题目：Animatable Neural Radiance Fields from Monocular RGB Videos<br>
+      论文地址：https://arxiv.org/pdf/2106.13629v2.pdf<br><br>
+
+      现有的3D重建有许多问题。一是需要高质量的标注设备。例如，同步摄像机、RGB-D传感器、这就限制了实际中的运用。二是，现有的人物3d重构算法，在建模几何细节方面，面临很大的挑战、例如对头发、眼镜、衣服的褶皱。<br><br>
+
+      这篇文章介绍的是一种直接从RGB视频直接重建人物3D结构的方法。这篇文章是基于nerf来做的（注：Nerf: Representing scenes as neural radiance fields for view synthesis，发表于eccv 2020上。虽然没有被评为当年的best paper。但我个人认为，它是无冕之王）。NeRF很牛，只需要输入若干角度的图像，就可以进行3D重构了。但是，NeRF一般只适用于相对静态的3D重构。对动作幅度过大的场景，则不稳定不可控。<br><br>
+
+      为了解决上述NeRF的不足，本文提出将NeRF与人体经典模型SMPL相结合，使NeRF更加可控。我们在第33篇博客中已经知道，SMPL很厉害。但是，对单目相机拍摄的video来说（如果没有绕人一圈进行multiview），SMPL所得到的结果也是很模糊的。因此，我们提出来联合优化NeRF和SMPL模型。<br><br>
+
+      相关文献<br>
+      3D人物重建。 3D人物重建根据输入可以分为single view， multi-view， RGB视频和RGB-D视频几类。在这其中，一个经典的方法是SMPL模型，它可以很好地处理不同衣服的情况，但是处理不了复杂的几何，例如头发和裙子。另外一个经典的方法是PIFu和PIFuHD系列。PIFuHD用了一个implicit function来回归3D表面，并且得到了很棒的效果，尤其是在多姿势、发型和衣服上。这种用Implict function的方式来做3D视觉，应该是未来的一个方向。CVPR 2021的best paper和它的一系列best paper candidate都是如此。不过PIFuHD还有局限性，例如，它比较模糊。<br><br>
+
+      神经辐射。实际上我认为，神经辐射和implict function是很相似的。神经辐射中最代表性的工作是NeRF。NeRF利用神经网络，把空间中的每一个坐标(x, y, z，相机角度)都映射成一个密度和颜色rgb（注：我认为NeRF、SDF/signed distance function和现在大为流行的implicit function有相似之处，因为implicit function也是把空间坐标(x,y,z)映射成某个东西。另外， NeRF作为一个开山之作，也有一些问题。它相当于把一个场景用一个神经网络来拟合了，所以泛化能力堪忧。具体地，NeRF有一个明显的缺陷是，一个场景等于一个神经网络了。我们的多视角图像并非作为输入，而是一般是作为ground-truth来用神经网络过拟合一个场景。如果换一组来自其它场景的muti-view的图像。则原来的神经网络没有用了。）我们回忆一下，在NeRF中，我们会concat一个latent code，但是那个code一般没有太多信息量。而我们知道，SMPL的100维左右向量是有很多信息的。我们为什么不直接用这个SMPL参数向量作为latent code呢？这正是西方的motivation。<br><br>
+
+      方法介绍<br>
+      首先，给定n帧视频序列（围绕人物一周），我们先利用现有的某些模型，估计其SMPL参数（约为100维左右）。为了使得泛化能力强和使得不受背景的干扰，本文先有分割方法把图像分割成mask，然后再用mask来估计SMPL参数（形状参数beta, 姿势参数theta，相机参数k）。<br><br>
+
+      但是，由于这些姿势比较多而复杂，我们直接放进NeRF里面进行人物重构不太容易。所以，需要对这个姿势映射成一个标准的T-pose（即双手打开，人站立成十字）。作者又用了一个pose-guided deformation来把SMPL参数转换，将原空间vertex坐标（x, y, z）转换为坐标(x', y', z')。<br><br>
+
+      然后这些“空间坐标（x, y, z）+ 相机视角”输入到NeRF中，预测得到密度和颜色。<br><br>
+
+      这些密度和颜色最终用differentiable rendering（可微的渲染）的方法，重新投影回2d，与输入的图像建立重构损失函数。整个过程是相对简单的。<br><br>
+
+      这里需要注意一点。NeRF模型的输入是“空间坐标（x, y, z）+ 相机视角”，输出是密度和颜色。也就是说，把相像放在一个地方，相机发出一条条射线，经过空间(x，y,，z)的任何一点，都会有个密度+rgb color。密度可以转换成空间中的点云。而rgb则相当于空间中每一点的颜色。由于不同的视线都预测不同的rgb，所以NeRF渲染出来的图像特别好看。那在本文方法中，则有个问题，我们query的点平常的姿势，则这个姿势先要根据SMPL得到一套vertex点云(x, y, z)。然后再用pose-guided deformation映射成T-Pose的vertex点云(x', y,' z')。所以，我们输入到NeRF的是（x’, y’, z’），输出密度和rgb。<br><br>
+
+      NeRF有一个明显的缺陷是，一个场景等于一个神经网络了。我们的多视角图像并非作为输入，而是一般是作为ground-truth来用神经网络过拟合一个场景。如果换一组来自其它场景的muti-view的图像。则原来的神经网络没有用了。
+
+
+       <br><br>
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
