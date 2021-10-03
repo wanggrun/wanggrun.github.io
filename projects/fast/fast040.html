@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Meta tags for search engines to crawl -->
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="Guangrun Wang; 王广润; Machine Learning; Computer Vision; Sun Yat-sen University; SYSU; HCP">
+<link rel="author" href="https://wanggrun.github.io/">
+
+    <title>Guangrun Wang (王广润)'s Homepage</title>
+    <style>
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
+p { font-size : 16px; }
+h1 { font-size : 34px; margin : 0; padding : 0; }
+h2 { font-size : 20px; margin : 0; padding : 0; }
+h3 { font-size : 18px; margin : 8; padding : 0; }
+body { padding : 0; font-family : Arial; font-size : 16px; background-color : #fff; }
+.title { width : 650px; margin : 20px auto; }
+.container { width : 750px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
+#bio {
+    padding-top : 40px;
+}
+#me { border : 0 solid black; margin-bottom : 50px; border-radius : 10px; }
+#sidebar { margin-left : 25px; border : 0 solid black; float : right; margin-bottom : 0;}
+a { text-decoration : none; }
+a:hover { text-decoration : underline; }
+a, a:visited { color : #0050e7; }
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+.codelogo { margin-right : 10px; float : left; border : 0;}
+.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
+.code .download a { display : block; margin : 0 15px; float : left;}
+.code strong a { color : #000; }
+.external a { margin : 0 10px; }
+.external a.first { margin : 0 10px 0 0; }
+    </style>
+    <script async="" src="../homepage_files/analytics.js"></script>
+</head>
+
+<body>
+    <div class="title">
+            <h1>
+              <div align="center">
+                <span itemprop="name"><font size="5">Reading google brain’s paper on knowledge distillation<br>阅读最新google brain关于knowledge distillation的文章</font> </span>
+              </div>
+            </h1>
+    </div>
+    <div class="container">
+      <p>
+
+      论文题目：Knowledge distillation: A good teacher is patient and consistent<br><br>
+
+      论文地址：https://arxiv.org/abs/2106.05237<br><br>
+
+
+      <b>我之前有以下的错误结论：</b>“一个改进知识蒸馏的有效技术：在做知识蒸馏的时候，我们一般都在使得Teacher和Student的输入相同。但是在self-supervised learning中，mean-teacher的输入和student的输入采用的是不同的data augmentation。也就是，在自监督学习中，我们对每个图像独立做data augmentation两次（如random crop等）得到两个view，分别输入到一个ema mean teacher网络和一个普通网络中，目标是最小化这个view的距离。其实自监督可以隐式地看作是一种自我蒸馏。把这个思想用到普通蒸馏中，我们对每个图像独立做data augmentation两次（如random crop等）得到两个view，分别输入到teacher和student中，可以提高普通知识蒸馏的性能，在imagenet能提高一到两个点。”<br><br>
+
+      <b>现在更正如下：</b>在transformer的知识蒸馏中，分别做两次独立的data augmentation输入给teacher和student，对transformer的蒸馏有帮助。但是，在cnn的蒸馏中，这样的操作可能没有帮助、甚至有负作用。注意，更正后的结论也有kd epoch数目相关，epoch数目越多，更新后的结论越成立。详细细节可参考下面的文章。在下面这个文章中，竟然在imagenet上kd了9600个epoch。这是我见过最长的kd epoch数目。<br><br>
+
+      今天我们要介绍的是google brain团队在最新的工作，使用kd把resnet提升的非常高（注：我认为resnet是一个很好的网络。虽然现在vit等很多网络刷得很高，但是resnet如果稍作修改+合理训练，也还可以）。<br><br>
+
+      注：我们都知道，knowledge distillation (KD)对模型压缩和普通模型训练都很有帮助。<br>
+      注：在模型压缩相关方法，如BiGNAS，slimmable网络、MIT韩松老师组模型压缩网络、动态网络相关工作中，涉及大网络包含小网络的，都用到inplace KD。提升性能显著。<br>
+      注：在最新的普通网络训练中，KD也被大肆使用。例如，如今sota的imagenet，全用了kd。例如visual transformer系列，例如一系mlp系列，例如jiashi <br>feng老师组的attention网络，都使用了kd来刷imagenet的训练。<br><br>
+
+      <h2>摘要</h2>
+      我们证明了，只要正确执行，kd可以作为一个强大的工具来压缩模型并不降低性能。特别地，本文发现有某些隐式的设计选择，可能对很大地影响kd的效果。因此，我们的核心贡献是，显示地认识这些设计选择。本文用大量的全面的实验，在多个数据集上，证明了效果。尤其是，本文把resnet-50在imagenet上的性能，提高到了82.8%。<br><br>
+
+      <h2>Introduction</h2>
+      根据tensorflow hub显示，现有的许多大模型都没有resent-50下载的多。原因是因为它们太大了，不实用。<br><br>
+
+      这篇文章发现，有三个trick对kd的性能影响巨大： <b>consistent image views, aggressive augmentations and very long training schedules。除了这三大trick外，还有几个insight可以算有意思的小trick。</b><br><br>
+
+      这篇文章还有对现有工作的反思。一、以前有人提出，为了节省计算，可以把teacher的输出activation存下来，这样就不需要forward了，省时间。作者认为这是不妥的。因为这样会使蒸馏的性能降低。二、以前人们对kd的输入形式认识有限，本文发现还有consistent image views+噪声，还有consistent image views+噪声+mixup。因此，以往对kd的认识是不够的。三、知识蒸馏的训练epoch实际应该比监督训练还要长才能获得很高的性能。不同于以往人们认为知识蒸馏时间比较短，本文认为应该更长。普通的resnet-50训练是100个epoch，本文的kd用了9600 epoch。这是我见过的最久的训练。<br><br>
+
+      文章主要是把一个在ImageNet-21k上训练的大模型BiT-ResNet-152x2教导给一个标准的resnet-50。用imagenet-21k是因为这个比imagenet更大，在其上面训练模型在imagenet上测试精度更高。这里说的标准的resnet-50，其实也有点改动，把原有的换成了gn，应该叫做BiT-ResNet-50才对。经过9600个epoch的蒸馏，resnet-50的精度达到了82.8%。<br><br>
+
+      <h2>方法</h2>
+      这篇文章主要是从实验的角度出发，说明了哪些技巧能提高kd的性能。在做知识蒸馏的时候，我们一般都在使得Teacher和Student的输入相同（也即，对输出做data augmentation后，拷贝两份分别输入到teacher和student中）。那么，一个问题来了，我们真的需要对teacher和student有完全一样的输入吗？我们是否可以输出分别做两次独立的augmentation。然后把它们分别输入给teacher和student呢？文章对比做了详细的分析。<br><br>
+
+      <b>第一种是fixed teacher</b>。此时，teacher的输入是不做augmentation的，而student则是做随机augmentation（random-crop等）。具体而言，teacher的输入有三种实现形式，方案一是每张图都直接resize成224x224。方案二是，每张图都居中crop 224x224（此方案经常叫做center cropping）。方案三是，每张图都是用sliding window crop 224x224的图出来，得到1024个crop(此方案叫常叫做multi-crop)，然后用1024个图依次forward得到1024个prediction然后做ensemble，以这个ensemble的结果做为teacher的输出。从实验结果来看，方案一效果极差，掉了几十个点。方案二和方案三还可以，但是方案三甚至没有方案二好。值得注意的是，后面提到的kd的第六个trick中，ensemble是有效的。<br><br>
+
+      <b>第二种是独立噪声</b>。独立噪声是指，对输入图像，分别独立做两次data augmentation输入给teacher和student。这个思路其实来自自监督学习。但是这篇文章的结果显示，独立噪声和fixed teacher的效果差不多。<br><br>
+
+      <b>第三种是一致教学</b>（这应该是大多数人默认的kd方式）。在这个方案中，只随机crop图像一次，然后用这个图像同时喂给teacher和student。“一致教学”可以有两种方案来实现。方案一是用普通随机crop。方案二是crop得更加强烈一点的inception crop（所谓强烈指的是裁的很极端，例如裁很小一个patch）。本文的实验结果表明，“一致教学”的方案一效果轻微高于“fixed teacher”和”独立噪声”。“一致教学”的方案二非常明显高于“fixed teacher”和”独立噪声”。<br><br>
+
+      基于“一致教学”的效果，作者得出kd三大trick的<b>前两个trick：consistent image views, aggressive augmentations</b>。即，teacher和student应该用相同的输入，并且，应该用更强烈的data augmentation。<br><br>
+
+      <b>第四种是function matching</b>。因为”一致教学”相当于老师输出什么，学生就学什么。但是这样不好，所谓授人以鱼不如授人以渔。所以，如果在”一致学习”的基础上，引用一致的噪声，可以让学生学会一种函数，而不是只学老师的输出。所以作者在“一致学习”的基础上，加入了mixup。具体地，只随机crop图像一次，然后将这个图像分别做两次mixup，分别喂给teacher和student。<br><br>
+
+      Mixup，将原图像*p + 随机图像*（1-p）。为使原图像占主导，应该有p \in (0.5, 1.0)。仔细想，“独立噪声”其实也是一种Function matching，只不过，“random crop两次”可能不如“random crop一次+mixup”。<br><br>
+
+      作者对比“一致教学”和“function matching”发现，在epoch数目不够多的情况下，“一致教学”比“function matching”好。当epoch非常多的时候，”function matching”远好于”一致教学”。所以，作者得出于kd三大trick的<b>第三个Trick，要蒸馏久一点</b>。作者竟然在imagenet上kd了9600个epoch。这是我见过最长的kd epoch数目。<br><br>
+
+      除了上述三大trick，我觉得从这篇文章还有几个insight。以下把这些insight也算进trick里面去。<br><br>
+
+      <b>Kd的第四个trick</b>：大图像输入大模型蒸馏小图小模型。我们都知道，大图像尺寸输入精度会比较高。然后，大图像输入又会使计算复杂度提高。能不能学习一个小模型，使得它有等价于大图像输入的效果？用kd。例如teacher的输入是384x384，而student的输入是224。或者teacher是224x224而student是160x160。这就可以大大减少模型的计算量了。<br><br>
+
+      <b>Kd的第五个trick：</b>我们已经可以看出来，本文的kd epoch数太多了。要9600个epoch。确实是前所未有的长。有没有办法缩短kd的epoch呢？作者指出，用Shampoo优化器替换Adam优化器是一个可能方案。<br><br>
+
+      <b>Kd的一个insight：</b>本文的kd epoch数实在太多了。除了改变优化器，还有没有其他可能呢。有人想到好的初始化应该有用。作者为了看是否有用，给student加载了一个预训练模型。果然前期快了不少。不过，到后期就不行了。后期甚至还不如不用预训练模型做初始化效果好。<br><br>
+
+      <b>Kd的第六个trick：</b>作者把224x224的teacher与384x384的teacher做ensemble（基于”function matching”），进一步取得了性能的提升。值得注意的是，在”fixed teacher”中，ensemble没有提升。但这里却可以提升。<br><br>
+
+      <b>Kd的另外一个insight：</b>我们一般的kd，是（1）在imagenet训练的teacher，（2）然后用imagenet中的数据将teacher的知识kd给Student，（3）最后还是在imagenet上进行测试。如果我们把步骤（2）改为：随便利用一个数据集X（imagenet除外）中的数据将teacher的知识kd给Student，而步骤（1）和（3）保持不变，是否还能蒸馏。作者的结果告诉我们，这是可以的，只不过性能会降非常多（掉几十个点，不过不过变成0）。这也比较有意思。如果数据集X和imagenet比较相关的话，则精度高一些。
+
+
+       <br><br>
+       <br><br>
+       -----------------------------------
+       <br><br>
+       大家好，我来自fast lab。我开始不定时公开写作。这些写作主要通过两个渠道公布：一是FAST LAB官方网站；一是印象识堂（微信可访问）。欢迎大家订阅。谢谢！
+       <br><br>
+       FAST Lab的官方网址为：<a href="https://wanggrun.github.io/projects/fast">https://wanggrun.github.io/projects/fast</a>
+       <br><br>
+       除此外，还可以关注我的小伙伴王广润：<a href="https://wanggrun.github.io/">https://wanggrun.github.io/</a> 
+       <br><br>
+       王广聪： <a href="https://wanggcong.github.io/">https://wanggcong.github.io/</a> 
+       <br><br>
+       石阳：<a href="https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/">https://www.linkedin.com/in/%E9%98%B3-%E7%9F%B3-381b521a4/</a>
+       <br><br>
+       有时候这些网站打不开，请耐心多点几次。
+       <br><br>
+       多谢大家关注。
+       <p><p>
+       </p>
+       <p>
+       <a href="https://wanggrun.github.io/projects/fast">返回博客目录Return to all Blogs</a>
+       <br>
+       <a href="https://wanggrun.github.io/">返回主页Return to homepage</a>
+       </p>
+    </div>
+ 
+</body></html>
+
+
