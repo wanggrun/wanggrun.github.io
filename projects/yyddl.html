@@ -69,6 +69,7 @@
 
 
 function getRTime(){
+var xx="250%"
 var year = 2022
 document.getElementById("year").innerHTML = "国考" + year + " 年："+ "<br>" + "<br>";
 //CVPR2022 Abstract 
@@ -141,15 +142,19 @@ task = "_guokao"
 document.getElementById("t_d"+task).innerHTML = day + "天";
 document.getElementById("t_d"+task).style.color="red";
 document.getElementById("t_d"+task).style.fontWeight = "bold";
+document.getElementById("t_d"+task).style.fontSize =xx
 document.getElementById("t_h"+task).innerHTML = hour + "小时";
 document.getElementById("t_h"+task).style.color="red";
 document.getElementById("t_h"+task).style.fontWeight = "bold";
+document.getElementById("t_h"+task).style.fontSize =xx
 document.getElementById("t_m"+task).innerHTML = min + "分钟";
 document.getElementById("t_m"+task).style.color="red";
 document.getElementById("t_m"+task).style.fontWeight = "bold";
+document.getElementById("t_m"+task).style.fontSize =xx
 document.getElementById("t_s"+task).innerHTML = sec + "秒，国考2022就要来了" + ";<br>" + "<br>";
 document.getElementById("t_s"+task).style.color="red";
 document.getElementById("t_s"+task).style.fontWeight = "bold";
+document.getElementById("t_s"+task).style.fontSize =xx
 
 
 
