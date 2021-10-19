@@ -1,0 +1,13 @@
+@article{Li2021DS_arxiv,
+  author    = {Changlin Li and
+               Guangrun Wang and
+               Bing Wang and
+               Xiaodan Liang and
+               Zhihui Li and
+               Xiaojun Chang},
+  title     = {DS-Net++: Dynamic Weight Slicing for Efficient Inference in CNNs and
+               Transformers},
+  journal   = {CoRR},
+  volume    = {abs/2109.10060},
+  year      = {2021},
+}
