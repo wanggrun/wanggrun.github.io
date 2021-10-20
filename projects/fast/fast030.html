@@ -56,7 +56,34 @@ a, a:visited { color : #0050e7; }
     <div class="container">
       <p>
 
-       I am writing this blog. Please wait.
+       (To save time, I merely wrote the following Chine texts. You might use Google Translation to translate the Chinese texts into English Texts.)<br><br>
+
+      论文：<a href="https://arxiv.org/abs/2104.08760">Solving Inefficiency of Self-supervised Representation Learning</a> <br><br>
+      代码：<a href="https://github.com/wanggrun/triplet">github</a> <br><br>
+      Oral presentation slices: <a href="https://drive.google.com/file/d/1lgEUss4UJS2HN2uuCYeFeY_E9cmF2G1y/view">slices</a> <br><br>
+      展示海报：<a href="https://drive.google.com/file/d/1gHC2yr9vQjNBAaZChvU64ORXqzvoVG9_/view">海报</a> <br><br>
+
+      大家好！关于未来的AI科学技术，不得不提的一个方向是无监督学习。最近几年，随着深度学习进入瓶颈区和低潮，科学家们都在考虑深度学习的未来。十年前，深度学习刚刚开始复苏，一切都充满了活力。十年后的今日，一切都充满了迷茫。虽然今天处于变革时间，未来的道路充满了迷茫；不过，可以肯定的是，LeCun和Kaiming，都在对无监督学习思索。（关于对未来的AI科学技术的思考，请参考我的另外一篇博客：<a href="https://wanggrun.github.io/projects/fast/fast038">《有哪些值得年轻人关注的未来AI科学技术？》</a>）<br><br>
+
+      无监督学习，在我们的教材里出现了很多次。无论是经典的模式分类这门课，还是数据挖掘这门课，还是人工智能这门课，都对无监督学习有很多介绍。K-Means等经典的聚类算法，是我们在课堂里，对无监督学习的原始印象。不过，我们跑过实验之后都会有这样的想法：无监督学习确实有效果；同时，无监督学习效果确实一般。<br><br>
+
+      直到这两年自监督学习的出现，情况似乎改变了。自监督学习在表征学习层面，达到、甚至在某种意义上超越了有监督学习。<br><br>
+
+      自监督学习的成功且引起人们的注意，始于自然语言理解(NLU)。其中，较为代表性的工作，是谷歌的BERT和OpenAI的GPT系列。在BERT中，我们在输入句子们前，随机地把句子中的若干单词擦除掉，然后让网络模型（一般为Transformer）来预测擦掉的单词。这种用句子本身（或句子中的一部分）来监督，称之为自监督。因为不需要任何标注，自监督是一种典型的无监督学习。BERT在自然语言理解任务中刷榜，占据榜首（欢迎关注我们的paper：<a href="https://arxiv.org/abs/2109.07222">EfficientBERT: Progressively Searching Multilayer Perceptron via Warm-up Knowledge Distillation</a>, Findings of EMNLP 2021）。而惊动一时的GPT家族，则利用了语言模型。大家不要被语言模型这个词吓倒，其实它就是一种装酷的词语，用老百姓的话来说，就是简单序列预测。例如，输入句子为"I love you."则输入I预测love，输入love预测you，输入you预测终止符。这也是自监督的一种体现。值得注意的是，GPT中除了这个监督，还用到了一个额外的标注，对每个句子还做了一个分类。所以，GPT是自监督与有监督的合璧。<br><br>
+
+      由于自监督在自然语言理解（NLU）中取得巨大的成功，人们不禁思考，自监督学习在计算机视觉(CV)中是否也可以使用。于是，各式各样的自监督任务(pretext task, )便开始在图像中脑洞大开。例如，当我们没有标注时，我们直接输入灰色图像，然后预测其彩色图像。又如，人们有意擦掉图像中的一部分，预测擦掉的部分（称为image impainting，这就和BERT很相似了。很可惜没有取得有意义的效果，直到后来2021年BEiT的出现，这个方向才重新有了重大突破。评情请阅BEiT的论文，里面十分有有趣地用到到CLIP和DALL.E的知识）。又如，把图像切成九宫格，随机抽取其中两格，预测它们的相对位置关系（分类）。还如，随机旋转图像成0，90，180，270度，预测旋转的角度（4分类）。总之，这些脑洞大开的想法，被人们一一用来做自监督，训练神经网络。虽然取得良好的进展，但始终没能吸引到人们的注意。因为其性能，实在太有限了。<br><br>
+
+      人们对CV中的自监督的重新充满期待，始于对比学习（Contrastive Learning, CL）。最近，自监督学习（SSL）在表征学习方面取得了显着的成果。其中，对比学习的结果在计算机视觉任务中最有前途。著名的作品包括 MoCo v1/v2、SimCLR、BYOL 和 SimSiam。例如，在 ImageNet 上，BYOL 的 top-1 准确率为 74.3%，接近监督学习的准确率，即 76.4%（目标线）。尽管有希望的准确性和很高的期望，但最先进的 SSL 方法的学习效率比监督学习方法低约十倍。例如，监督学习方法通常需要大约 100 个 epochs 在 ImageNet 上训练 ResNet50。相比之下，SimCLR 和 BYOL 需要花费 1000 个 epoch，而 MoCo v2 需要花费 800 个 epoch。<br><br>
+
+      为了解决这个问题，我们重新思考了现有 SSL 方法的机制，并将其天生的缺点归因于两个相反的问题，即欠聚类和过聚类。具体来说，在批量训练期间，对比学习对每个图像随机裁剪两次以获得两个views并研究这两个views之间的相似性（称为正样本对，例如图像 X 的view A 和view B）。同时，一些方法还研究了不同图像之间的views（称为负样本对，例如图像 X 的view A 和图像 Y 的view B）之间的差异。优化目标是减少正样本对之间的距离，扩大负样本对之间的距离。正如度量学习所建议的，需要足够的负样本对来保证学习效率。否则，缺少负样本——无论是由于像 SimCLR 这样的 GPU 内存限制还是 (ii) 像 BYOL 和 SimSiam 这样的算法设计——都会使不同的对象类别重叠。这被识别为欠聚类问题。由于欠聚类，SimCLR 和 BYOL 的学习效率低，因为模型不能有效地发现类间样本之间的差异。相反，过多的负样本会导致相反的问题，即过度聚类，这意味着负样本是假阴性，并且模型将相同实际类别的样本过度聚类到不同的聚类中。在极端情况下，ImageNet 将有 128 万个集群。过度聚类也会导致学习效率低下，因为它徒劳地鼓励了类内样本之间的不同。正如现有工作所报告的那样，过度聚类会导致不必要的有害表征学习。例如，由于直接将 CIFAR-10聚成 50K类，Exemplar-CNN 获得了不满意的性能。 MoCo v1/v2 无法进一步提高准确度，甚至利用动量存储大量负样本。综上所述，现有的对比学习无法避免欠聚类或过聚类的问题，因此其学习效率仍然较低。<br><br>
+
+      为了解决上述欠聚类和过聚类的问题，人们已经提出了一些开创性的工作来分析负样本在对比损失中的作用。与这些使用过于复杂的对比损失的方法相反，我们提出了一个使用非常简单的truncated triplet loss的 SSL 框架（早期tripet loss是在行人再识别领域和人脸识别领域同时独立引入深度学习中。其中triplet loss for行人再识别也是我们组的工作：<a href="https://arxiv.org/abs/1512.03622">Deep Feature Learning with Relative Distance Comparison for Person Re-identification</a>，曾获得pattern recognition期刊年度最佳论文）。具体来说，三元组损失可以最大化每个三元组单元的正负对之间的相对距离。拥有大量的三元组，我们可以解决欠聚类的问题，因为丰富的三元组包含丰富的负对，保证负样本对之间有相当大的距离。<br><br> Triplet loss 在很大程度上解决了欠聚类的问题，但引发了过度聚类的问题。因此，我们提出了一种新的截断三元组损失，以避免将来自同一类别的样本过度聚类到不同的聚类中。伯努利分布模型保证了截断的三元组。这显着提高了 SSL 的学习效率并带来了最先进的性能。<br><br>
+
+      总结起来，我们的贡献是三方面的。（1）我们分析了现有的表现最佳的对比学习方法，并将它们的低学习效率归因于欠聚类和聚类过度，这导致仅仅为了记住数据而进行不必要的有害表征学习。（2）为了解决聚类不足和过度聚类的问题，我们提出了一种使用截断三元组损失的新型 SSL 框架。准确地说，我们采用包含丰富负样本的三元组损失来解决聚类不足问题，并且我们的三元组损失使用截断/修剪的三元组来避免过度聚类，这由伯努利分布模型保证。（3）我们的方法显着提高了 SSL 的学习效率，从而在几个大型基准测试（例如 ImageNet、SYSU-30k 和 COCO 2017）和各种下游任务中获得了先进的性能。<br><br>
+
+      近来，自监督学习和视觉transformer也得到了联合发展。比较著名的工作DINO(<a href="https://arxiv.org/abs/2104.14294">DINO</a>)就是把自监督用到了视觉transformer中，取得了很好的性能，尤其是达到了可以无监督地分割物体的程度。我们的方法也可以直接应用到视觉transformer中。<br><br>
+
+      除了在自然语言理解、计算机视觉中取得了重要进展。自监督学习同样在生物领域取得了长足的进展。例如，最近DeepMind发表在Nature的几篇的蛋白质结构预测工作，也用了到自监督学习的技术。
 
 
        <br><br>
