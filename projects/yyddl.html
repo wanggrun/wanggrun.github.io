@@ -19,6 +19,10 @@
 <span id="t_h_guokao">00Hour</span>
 <span id="t_m_guokao">00Minute</span>
 <span id="t_s_guokao">00Second</span>
+<span id="t_d_sz">00Day</span>
+<span id="t_h_sz">00Hour</span>
+<span id="t_m_sz">00Minute</span>
+<span id="t_s_sz">00Second</span>
 <!-- <span id="t_d_acl_abstract">00Day</span>
 <span id="t_h_acl_abstract">00Hour</span>
 <span id="t_m_acl_abstract">00Minute</span>
@@ -71,7 +75,7 @@
 function getRTime(){
 var xx="250%"
 var year = 2022
-document.getElementById("year").innerHTML = "国考" + year + " 年："+ "<br>" + "<br>";
+document.getElementById("year").innerHTML = "国考和深圳市考" + year + " 年："+ "<br>" + "<br>";
 //CVPR2022 Abstract 
 // task = "_cvpr2022_abstract"
 // var EndTime= new Date('2021/11/09 19:59:59'); //截止时间
@@ -152,6 +156,38 @@ document.getElementById("t_m"+task).style.color="red";
 document.getElementById("t_m"+task).style.fontWeight = "bold";
 document.getElementById("t_m"+task).style.fontSize =xx
 document.getElementById("t_s"+task).innerHTML = sec + "秒，国考2022就要来了" + ";<br>" + "<br>";
+document.getElementById("t_s"+task).style.color="red";
+document.getElementById("t_s"+task).style.fontWeight = "bold";
+document.getElementById("t_s"+task).style.fontSize =xx
+
+
+
+//Guo Kao
+var EndTime= new Date('2021/12/11 15:59:59'); //截止时间
+var NowTime = new Date();
+var t =EndTime.getTime() - NowTime.getTime();
+if(Math.floor(t/1000) == 0){
+clearInterval(set);
+}
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
+task = "_sz"
+document.getElementById("t_d"+task).innerHTML = day + "天";
+document.getElementById("t_d"+task).style.color="red";
+document.getElementById("t_d"+task).style.fontWeight = "bold";
+document.getElementById("t_d"+task).style.fontSize =xx
+document.getElementById("t_h"+task).innerHTML = hour + "小时";
+document.getElementById("t_h"+task).style.color="red";
+document.getElementById("t_h"+task).style.fontWeight = "bold";
+document.getElementById("t_h"+task).style.fontSize =xx
+document.getElementById("t_m"+task).innerHTML = min + "分钟";
+document.getElementById("t_m"+task).style.color="red";
+document.getElementById("t_m"+task).style.fontWeight = "bold";
+document.getElementById("t_m"+task).style.fontSize =xx
+document.getElementById("t_s"+task).innerHTML = sec + "秒，深圳市考2022就要来了" + ";<br>" + "<br>";
 document.getElementById("t_s"+task).style.color="red";
 document.getElementById("t_s"+task).style.fontWeight = "bold";
 document.getElementById("t_s"+task).style.fontSize =xx
