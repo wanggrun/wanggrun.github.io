@@ -3,7 +3,7 @@ torchvision.transforms.RandomResizedCrop(size, scale=(0.08, 1.0), ratio=(0.75, 1
 或者
 torchvision.transforms.Resize(size, interpolation=<InterpolationMode.BILINEAR: 'bilinear'>, max_size=None, antialias=None)
 时，默认情况下，size都是输入int，如224。
-如果我们想要H和W不同，如，我们需要长为H=384，W为512，本来按照官方api，也是可以的，只需要size=(384, 512)即可。但是在torch=xx, torchvision=xxx的情况下，会出现bug。例如你的代码如下：
+如果我们想要H和W不同，如，我们需要长为H=384，W为512，本来按照官方api，也是可以的，只需要size=(384, 512)即可。但是在torch=1.9.0, torchvision=0.10.0的情况下，会出现bug。例如你的代码如下：
 from torchvision import transforms
 [
         transforms.Resize(img_size, _pil_interp(interpolation)),
