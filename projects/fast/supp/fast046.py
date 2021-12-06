@@ -43,6 +43,7 @@ class FixedResize(object):
         interpolation: Default: PIL.Image.BILINEAR
     """
     def __init__(self, size, interpolation='bilinear'):
+        size = size[0]
         if isinstance(size, (list, tuple)):
             self.size = size
         else:
