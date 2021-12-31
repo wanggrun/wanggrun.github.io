@@ -39,8 +39,8 @@ clearInterval(set);
 }
 
 
-var year = Math.floor(t/1000/60/60/24/365);
-var moreday = Math.floor(year + 4)/4;
+var year_as = Math.floor(t/1000/60/60/24/365);
+var moreday = Math.floor((year_as + 4)/4);
 var year_day = Math.floor(t/1000/60/60/24%365)-moreday;
 var day = Math.floor(t/1000/60/60/24);
 var hour = Math.floor(t/1000/60/60%24);
@@ -49,7 +49,7 @@ var sec = Math.floor(t/1000%60);
 
 
 task_as = "_as"
-document.getElementById("year"+task).innerHTML = year + "年";
+document.getElementById("year"+task).innerHTML = _as + "年";
 document.getElementById("year"+task).style.color="red";
 document.getElementById("year"+task).style.fontWeight = "bold";
 document.getElementById("year"+task).style.fontSize =xx
