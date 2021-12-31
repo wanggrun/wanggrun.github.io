@@ -6,6 +6,12 @@
 </head>
 <body>
 <DIV id="CountMsg" class="HotDate">
+<span id="year_as">00Year</span>
+<span id="t_d_as">00Day</span>
+<span id="t_h_as">00Hour</span>
+<span id="t_m_as">00Minute</span>
+<span id="t_s_big_as">00</span>
+<span id="t_s_as">Second</span>
 <span id="year">00Year</span>
 <span id="t_d_jn">00Day</span>
 <span id="t_h_jn">00Hour</span>
@@ -24,8 +30,7 @@ var yy="550%"
 var year = 2012
 document.getElementById("year").innerHTML = "王广润和石阳在一起纪念日," + "<br>" + "<br>" + "从" + year + "年02月18日开始，至今已经："+ "<br>" + "<br>";
 document.getElementById("year").style.fontSize =xx
-//jn 
-task = "_jn"
+
 var EndTime= new Date('2012/02/18 00:00:00'); //截止时间
 var NowTime = new Date();
 var t =EndTime.getTime() - NowTime.getTime();
@@ -34,12 +39,44 @@ clearInterval(set);
 }
 
 
+var year = Math.floor(t/1000/60/60/24/365);
+var moreday = Math.floor(year + 4)/4;
+var year_day = Math.floor(t/1000/60/60/24%365)-moreday;
 var day = Math.floor(t/1000/60/60/24);
 var hour = Math.floor(t/1000/60/60%24);
 var min = Math.floor(t/1000/60%60);
 var sec = Math.floor(t/1000%60);
 
 
+task_as = "_as"
+document.getElementById("year"+task).innerHTML = year + "年";
+document.getElementById("year"+task).style.color="red";
+document.getElementById("year"+task).style.fontWeight = "bold";
+document.getElementById("year"+task).style.fontSize =xx
+document.getElementById("t_d"+task).innerHTML = year_day + "天";
+document.getElementById("t_d"+task).style.color="red";
+document.getElementById("t_d"+task).style.fontWeight = "bold";
+document.getElementById("t_d"+task).style.fontSize =xx
+document.getElementById("t_h"+task).innerHTML = hour + "小时";
+document.getElementById("t_h"+task).style.color="red";
+document.getElementById("t_h"+task).style.fontWeight = "bold";
+document.getElementById("t_h"+task).style.fontSize =xx
+document.getElementById("t_m"+task).innerHTML = min + "分钟";
+document.getElementById("t_m"+task).style.color="red";
+document.getElementById("t_m"+task).style.fontWeight = "bold";
+document.getElementById("t_m"+task).style.fontSize =xx
+document.getElementById("t_s_big"+task).innerHTML = sec + "";
+document.getElementById("t_s_big"+task).style.color="red";
+document.getElementById("t_s_big"+task).style.fontWeight = "bold";
+document.getElementById("t_s_big"+task).style.fontSize =yy
+document.getElementById("t_s"+task).innerHTML = "秒." + "<br>" + "<br>" ;
+document.getElementById("t_s"+task).style.color="red";
+document.getElementById("t_s"+task).style.fontWeight = "bold";
+document.getElementById("t_s"+task).style.fontSize =xx
+
+
+//jn 
+task = "_jn"
 document.getElementById("t_d"+task).innerHTML = day + "天";
 document.getElementById("t_d"+task).style.color="red";
 document.getElementById("t_d"+task).style.fontWeight = "bold";
@@ -60,6 +97,10 @@ document.getElementById("t_s"+task).innerHTML = "秒,    愿岁月静好。" + "
 document.getElementById("t_s"+task).style.color="red";
 document.getElementById("t_s"+task).style.fontWeight = "bold";
 document.getElementById("t_s"+task).style.fontSize =xx
+
+
+
+
 
 
 document.getElementById("word").innerHTML = "永远守护你！爱你一万年！"+ "<br>" + "<br>";
