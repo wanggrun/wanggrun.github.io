@@ -31,7 +31,10 @@ var year = 2012
 document.getElementById("year").innerHTML = "王广润和石阳在一起纪念日," + "<br>" + "<br>" + "从" + year + "年02月18日开始，至今已经："+ "<br>" + "<br>";
 document.getElementById("year").style.fontSize =xx
 
-var StartTime= new Date('2012/02/18 00:00:00'); //截止时间
+// var StartTime= new Date('2012/02/18 00:00:00'); //截止时间
+var StartTime = new Date('February 18, 2012 00:00:00 GMT+08:00');
+
+
 var NowTime = new Date();
 var t = NowTime.getTime() - StartTime.getTime();
 if(Math.floor(t/1000) == 0){
