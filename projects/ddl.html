@@ -7,6 +7,10 @@
 <body>
 <DIV id="CountMsg" class="HotDate">
 <span id="year">00Year</span>
+<span id="t_d_eccv2022_paper">00Day</span>
+<span id="t_h_eccv2022_paper">00Hour</span>
+<span id="t_m_eccv2022_paper">00Minute</span>
+<span id="t_s_eccv2022_paper">00Second</span>
 <span id="t_d_cvpr2022_abstract">00Day</span>
 <span id="t_h_cvpr2022_abstract">00Hour</span>
 <span id="t_m_cvpr2022_abstract">00Minute</span>
@@ -71,6 +75,34 @@
 function getRTime(){
 var year = 2022
 document.getElementById("year").innerHTML = "DDL of leading AI conferences in " + year + " Year:"+ "<br>" + "<br>";
+
+//ECCV2022 Abstract 
+task = "_eccv2022_abstract"
+var EndTime= new Date('March 07, 2022 11:59:59 GMT-08:00'); //截止时间
+var NowTime = new Date();
+var t =EndTime.getTime() - NowTime.getTime();
+if(Math.floor(t/1000) == 0){
+clearInterval(set);
+}
+var day = Math.max(0,Math.floor(t/1000/60/60/24));
+var hour = Math.max(0,Math.floor(t/1000/60/60%24));
+var min = Math.max(0,Math.floor(t/1000/60%60));
+var sec = Math.max(0,Math.floor(t/1000%60));
+
+document.getElementById("t_d"+task).innerHTML = day + " Day";
+document.getElementById("t_d"+task).style.color="red";
+document.getElementById("t_d"+task).style.fontWeight = "bold";
+document.getElementById("t_h"+task).innerHTML = hour + " Hour";
+document.getElementById("t_h"+task).style.color="red";
+document.getElementById("t_h"+task).style.fontWeight = "bold";
+document.getElementById("t_m"+task).innerHTML = min + " Minute";
+document.getElementById("t_m"+task).style.color="red";
+document.getElementById("t_m"+task).style.fontWeight = "bold";
+document.getElementById("t_s"+task).innerHTML = sec + " Second,    ECCV 2022 paper" + ";<br>";
+document.getElementById("t_s"+task).style.color="red";
+document.getElementById("t_s"+task).style.fontWeight = "bold";
+
+
 //CVPR2022 Abstract 
 task = "_cvpr2022_abstract"
 var EndTime= new Date('2021/11/10 15:59:59'); //截止时间
