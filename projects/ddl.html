@@ -77,8 +77,8 @@ var year = 2022
 document.getElementById("year").innerHTML = "DDL of leading AI conferences in " + year + " Year:"+ "<br>" + "<br>";
 
 //ECCV2022 Abstract 
-task = "_eccv2022_abstract"
-var EndTime= new Date('March 07, 2022 11:59:59 GMT+08:00'); //截止时间
+task = "_eccv2022_paper"
+var EndTime= new Date('March 07, 2022 11:59:59 GMT-08:00'); //截止时间
 var NowTime = new Date();
 var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
