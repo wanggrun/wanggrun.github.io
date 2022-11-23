@@ -165,6 +165,7 @@
             Classifiers and generators have long been separated. We break down this separation and showcase that conventional neural network classifiers can generate high-quality images of a large number of categories, being comparable to the state-of-the-art generative models (e.g., DDPMs and GANs).
 We achieve this by computing the partial derivative of the classification loss function with respect to the input to optimize the input to produce an image. Since it is widely known that directly optimizing the inputs is similar to targeted adversarial attacks incapable of generating human-meaningful images, we propose a mask-based stochastic reconstruction module to make the gradients semantic-aware to synthesize plausible images. We further propose a progressive-resolution technique to guarantee fidelity, which produces photorealistic images. Furthermore, we introduce a distance metric loss and a non-trivial distribution loss to ensure classification neural networks can synthesize diverse and high-fidelity images. Using traditional neural network classifiers, we can generate good-quality images of 256$\times$256 resolution on ImageNet.
 
+<br>
 Proving that classifiers have learned the data distribution and are ready for image generation has far-reaching implications, for classifiers are much easier to train than generative models like DDPMs and GANs. We don't even need to train classification models because tons of public ones are available for download. Also, this holds great potential for the interpretability and robustness of classifiers.  
             </p>
           </div>
@@ -179,14 +180,14 @@ Proving that classifiers have learned the data distribution and are ready for im
    
   <br><br>
   <div align="center">
-  <h2 class="title is-4 has-text-centered">Pipeline</h2>
+  <h2 class="title is-4 has-text-centered">AI Generator and Problems</h2>
   </div>
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
         <a href="" target="_blank">
         <div align="center">
-          <img class="cover" id="mag" src="./saae_pipeline.png"
+          <img class="cover" id="mag" src="./cag_ai_generator.png"
             style="width:50%; margin-bottom:20px">
           <!-- <img class="cover" id="mag"  src="https://images.alphacoders.com/108/1086836.jpg" style="width:100%; margin-bottom:20px"> -->
         </div>    
@@ -202,14 +203,39 @@ Proving that classifiers have learned the data distribution and are ready for im
   
   <br><br>
   <div align="center">
-  <h2 class="title is-4 has-text-centered">Interpretability</h2>
+  <h2 class="title is-4 has-text-centered">Classifier as Visualizer and Problems</h2>
   </div>
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
         <a href="" target="_blank">
         <div align="center">
-          <img class="cover" id="mag" src="./saae_xai.png"
+          <img class="cover" id="mag" src="./cag_intro_cls.png"
+            style="width:50%; margin-bottom:20px">
+          <!-- <img class="cover" id="mag"  src="https://images.alphacoders.com/108/1086836.jpg" style="width:100%; margin-bottom:20px"> -->
+        </div>    
+        </a>
+        <!-- <h3 class="has-text-centered">Hover mouse over the image for a zoomed-in view.</h3> -->
+        <!-- <script>
+        magnify("mag", 3);
+      </script> -->
+      </div>
+    </div>
+
+  </section>
+    
+    
+  
+  <br><br>
+  <div align="center">
+  <h2 class="title is-4 has-text-centered">Framework</h2>
+  </div>
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <a href="" target="_blank">
+        <div align="center">
+          <img class="cover" id="mag" src="./cag_framework.png"
             style="width:50%; margin-bottom:20px">
           <!-- <img class="cover" id="mag"  src="https://images.alphacoders.com/108/1086836.jpg" style="width:100%; margin-bottom:20px"> -->
         </div>    
