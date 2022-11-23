@@ -1,1 +1,291 @@
-a
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Traditional Classification Neural Networks are Good Generators">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Traditional Classification Neural Networks are Good Generators</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <script src="https://kit.fontawesome.com/ec39017701.js" crossorigin="anonymous"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+  <div id="loading">
+    <div class="loader"></div>
+    <!-- <img id="loading-image" src="path/to/ajax-loader.gif" alt="Loading..." /> -->
+  </div>
+
+
+
+  <!-- <script> magnify("myimage", 3); </script> -->
+
+  <section class="hero">
+    <div align="center">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Traditional Classification Neural Networks are Good Generators</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <br>
+                <h3 style="color:#094879;">Technical Report</h3>
+                
+                <br>
+                <span class="author-block">
+                  <a href="https://wanggrun.github.io/" target="_blank">Guangrun Wang</a>, </span>
+                <span class="author-block">
+                  <a href="https://www.robots.ox.ac.uk/~phst/" target="_blank">Philip H.S. Torr</a>
+                </span>
+            </div>
+
+            <br>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">TVG of University of Oxford</span>
+            </div>
+
+            <br>
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <!-- <span class="link-block">
+                <a href="" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark inactiveLink">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+                <span class="link-block">
+                  <a href="https://wanggrun.github.io/projects/works/cag" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://wanggrun.github.io/projects/works/cag" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Talk</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/wanggrun/CaG" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>GitHub</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. 
+
+                <span class="link-block">
+                  <a href="" class="external-link button is-normal is-rounded is-dark inactiveLink">
+                    <span class="icon">
+                      <i class="far fa-images"></i>
+                    </span>
+                    <span>Data (To be Released)</span>
+                  </a>
+                  -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <br><br>
+  <!-- Teaser Picture -->
+  <section class="hero teaser">
+    <div align="center">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <!-- <img class="thumbnail" src="static/images/stylelight_teaser.png" style="width:120%; margin-bottom:20px"> -->
+        <!-- <div class="img-magnifier-container">
+        <img id="magnifyimg" src="static/images/stylelight_teaser.png" style="width:100%; margin-bottom:20px">
+      </div> -->
+
+        <a href="" target="_blank">
+          <img class="cover" id="mag" src="./cag_result_overview.png"
+            style="width:800px; margin-bottom:20px">
+          <!-- <img class="cover" id="mag"  src="https://images.alphacoders.com/108/1086836.jpg" style="width:100%; margin-bottom:20px"> -->
+        </a>
+        <!-- <h3 class="has-text-centered">Hover mouse over the image for a zoomed-in view.</h3> -->
+        <!-- <script>
+        magnify("mag", 3);
+      </script> -->
+      </div>
+      </div>
+    </div>
+
+  </section>
+
+  
+  <br><br>
+  <!-- Abstract. -->
+  <section class="section">
+    <div align="center">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              The resurgence of unsupervised learning can be attributed to the remarkable progress of self-supervised learning, which includes generative (G) and discriminative (D) models. In computer vision, the mainstream self-supervised learning algorithms are D models. However, designing a D model could be over-complicated; also, some studies hinted that a D model might not be as general and interpretable as a G model. In this paper, we switch from D models to G models using the classical auto-encoder (AE). Note that a vanilla G model was far less efficient than a D model in self-supervised computer vision tasks, as it wastes model capability on overfitting semantic-agnostic high-frequency details. Inspired by perceptual learning that could use cross-view learning to perceive concepts and semantics, we propose a novel AE that could learn semantic-aware representation via cross-view image reconstruction. We use one view of an image as the input and another view of the same image as the reconstruction target. This kind of AE has rarely been studied before, and the optimization is very difficult. To enhance learning ability and find a feasible solution, we propose a semantic aligner that uses geometric transformation knowledge to align the hidden code of AE to help optimization. These techniques significantly improve the representation learning ability of AE and make self-supervised learning with G models possible. Extensive experiments on many large-scale benchmarks (e.g., ImageNet, COCO 2017, and SYSU-30k) demonstrate the effectiveness of our methods.  
+            </p>
+          </div>
+        </div>
+      </div>
+      </div>
+  </section>
+  <!--/ Abstract. -->
+
+
+
+   
+  <br><br>
+  <div align="center">
+  <h2 class="title is-4 has-text-centered">Pipeline</h2>
+  </div>
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <a href="" target="_blank">
+        <div align="center">
+          <img class="cover" id="mag" src="./saae_pipeline.png"
+            style="width:50%; margin-bottom:20px">
+          <!-- <img class="cover" id="mag"  src="https://images.alphacoders.com/108/1086836.jpg" style="width:100%; margin-bottom:20px"> -->
+        </div>    
+        </a>
+        <!-- <h3 class="has-text-centered">Hover mouse over the image for a zoomed-in view.</h3> -->
+        <!-- <script>
+        magnify("mag", 3);
+      </script> -->
+      </div>
+    </div>
+
+  </section>
+  
+  <br><br>
+  <div align="center">
+  <h2 class="title is-4 has-text-centered">Interpretability</h2>
+  </div>
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <a href="" target="_blank">
+        <div align="center">
+          <img class="cover" id="mag" src="./saae_xai.png"
+            style="width:50%; margin-bottom:20px">
+          <!-- <img class="cover" id="mag"  src="https://images.alphacoders.com/108/1086836.jpg" style="width:100%; margin-bottom:20px"> -->
+        </div>    
+        </a>
+        <!-- <h3 class="has-text-centered">Hover mouse over the image for a zoomed-in view.</h3> -->
+        <!-- <script>
+        magnify("mag", 3);
+      </script> -->
+      </div>
+    </div>
+
+  </section>
+
+ 
+
+    <br><br>
+
+  <!--/ Style-mixing -->
+  
+  <section class="section" id="Citaton">
+    <div class="container is-max-desktop content">
+      <div align="center">
+      <h2 class="title">Related Links</h2>
+      <p><a href="https://arxiv.org/abs/2205.09113"> He et al., Masked autoencoders are scalable vision learners, CVPR 2022.</a></p>
+      <p><a href="https://arxiv.org/abs/2104.14294">Caron et al., Emerging Properties in Self-Supervised Vision Transformers, ICCV 2021</a></p>
+      <p><a href="https://arxiv.org/abs/2104.08760">Wang et al., Solving Inefficiency of Self-supervised Representation Learning, ICCV 2021.</a></p>
+      </div>
+    </div>
+  </section>
+  
+  <br><br>
+  <section class="section" id="Citaton">
+    <div class="container is-max-desktop content">
+      <div align="center">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+      @inproceedings{wang2022semantic,
+  title={Semantic-Aware Auto-Encoders for Self-Supervised Representation Learning},
+  author={Wang, Guangrun and Tang, Yansong and Lin, Liang and Torr, Philip HS},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={9664--9675},
+  year={2022}
+}
+      </code></pre>
+    </div>
+    </div>
+  </section>
+    
+  <br><br>
+  <section class="section" id="Recommendation">
+    <div class="container is-max-desktop content">
+      <div align="center">
+      <h2 class="title">Recommendation</h2>
+      A highly recommended project: <a href="https://wanggrun.github.io/projects/works/cag" target="_blank">Traditional Classification Neural Networks are Good Generators</a>.
+    </div>
+    </div>
+  </section>
+
+   <br><br>
+  <footer class="footer">
+    <div align="center">
+    <div class="logos">
+      <img class="thumbnail" src="./saae_oxford.png" style="height:300px;">
+    </div>
+    <br>
+    <div class="columns is-centered">
+      <div class="content">
+        <p> Thanks to the great effort done by Nerfies' project, we borrow the website template from <a
+            href="https://github.com/nerfies/nerfies.github.io" target="_blank"> nerfies's webpage</a>. </p>
+      </div>
+    </div>
+    </div>
+  </footer>
+
+  <script>
+    $(window).on('load', function () {
+      $('#loading').hide();
+    })
+  </script>
+</body>
+
+</html>
