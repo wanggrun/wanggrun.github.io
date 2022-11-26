@@ -4,10 +4,10 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Traditional Classification Neural Networks are Good Generators">
+  <meta name="description" content="Traditional Classification Neural Networks are Good Generators: They are Competitive with DDPMs and GANs">
   <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Traditional Classification Neural Networks are Good Generators</title>
+  <title>Traditional Classification Neural Networks are Good Generators: They are Competitive with DDPMs and GANs</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
@@ -44,8 +44,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Traditional Classification Neural Networks are Good Generators</h1>
-            <div class="is-size-5 publication-authors">
+            <h1 class="title is-1 publication-title">Traditional Classification Neural Networks are Good Generators: They are Competitive with DDPMs and GANs">
               <span class="author-block">
                 <br>
                 <h3 style="color:#094879;">Technical Report</h3>
@@ -154,10 +153,9 @@
           <div class="content has-text-justified">
             <p>
             Classifiers and generators have long been separated. We break down this separation and showcase that conventional neural network classifiers can generate high-quality images of a large number of categories, being comparable to the state-of-the-art generative models (e.g., DDPMs and GANs).
-We achieve this by computing the partial derivative of the classification loss function with respect to the input to optimize the input to produce an image. Since it is widely known that directly optimizing the inputs is similar to targeted adversarial attacks incapable of generating human-meaningful images, we propose a mask-based stochastic reconstruction module to make the gradients semantic-aware to synthesize plausible images. We further propose a progressive-resolution technique to guarantee fidelity, which produces photorealistic images. Furthermore, we introduce a distance metric loss and a non-trivial distribution loss to ensure classification neural networks can synthesize diverse and high-fidelity images. Using traditional neural network classifiers, we can generate good-quality images of 256$\times$256 resolution on ImageNet.
-
-<br>
-Proving that classifiers have learned the data distribution and are ready for image generation has far-reaching implications, for classifiers are much easier to train than generative models like DDPMs and GANs. We don't even need to train classification models because tons of public ones are available for download. Also, this holds great potential for the interpretability and robustness of classifiers.  
+We achieve this by computing the partial derivative of the classification loss function with respect to the input to optimize the input to produce an image. Since it is widely known that directly optimizing the inputs is similar to targeted adversarial attacks incapable of generating human-meaningful images, we propose a mask-based stochastic reconstruction module to make the gradients semantic-aware to synthesize plausible images. We further propose a progressive-resolution technique to guarantee fidelity, which produces photorealistic images. Furthermore, we introduce a distance metric loss and a non-trivial distribution loss to ensure classification neural networks can synthesize diverse and high-fidelity images. Using traditional neural network classifiers, we can generate good-quality images of 256$\times$256 resolution on ImageNet. Intriguingly, our method is also applicable to text-to-image generation by regarding image-text foundation models as generalized classifiers.
+<br><br>
+Proving that classifiers have learned the data distribution and are ready for image generation has far-reaching implications, for classifiers are much easier to train than generative models like DDPMs and GANs. We don't even need to train classification models because tons of public ones are available for download. Also, this holds great potential for the interpretability and robustness of classifiers.
             </p>
           </div>
         </div>
@@ -838,7 +836,7 @@ Proving that classifiers have learned the data distribution and are ready for im
     <div class="container is-max-desktop content">
       <div align="center">
       <h2 class="title">Recommendation</h2>
-      A highly recommended project: <a href="https://wanggrun.github.io/projects/works/cag" target="_blank">Traditional Classification Neural Networks are Good Generators</a>.
+      A highly recommended project: <a href="https://wanggrun.github.io/projects/works/cag" target="_blank">Traditional Classification Neural Networks are Good Generators: They are Competitive with DDPMs and GANs</a>.
     </div>
     </div>
   </section>
