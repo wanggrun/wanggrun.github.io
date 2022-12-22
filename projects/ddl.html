@@ -2,15 +2,15 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>DDL of leading AI conferences in 2022</title>
+<title>DDL of leading AI conferences in 2023</title>
 </head>
 <body>
 <DIV id="CountMsg" class="HotDate">
 <span id="year">00Year</span>
-<span id="t_d_eccv2022_paper">00Day</span>
-<span id="t_h_eccv2022_paper">00Hour</span>
-<span id="t_m_eccv2022_paper">00Minute</span>
-<span id="t_s_eccv2022_paper">00Second</span>
+<span id="t_d_icml2023_paper">00Day</span>
+<span id="t_h_icml2023_paper">00Hour</span>
+<span id="t_m_icml2023_paper">00Minute</span>
+<span id="t_s_icml2023_paper">00Second</span>
 <span id="t_d_cvpr2022_abstract">00Day</span>
 <span id="t_h_cvpr2022_abstract">00Hour</span>
 <span id="t_m_cvpr2022_abstract">00Minute</span>
@@ -73,12 +73,12 @@
 
 
 function getRTime(){
-var year = 2022
+var year = 2023
 document.getElementById("year").innerHTML = "DDL of leading AI conferences in " + year + " Year:"+ "<br>" + "<br>";
 
-//ECCV2022 Abstract 
-task = "_eccv2022_paper"
-var EndTime= new Date('March 07, 2022 11:59:59 GMT-08:00'); //截止时间
+//ICML2023 Abstract 
+task = "_icml2023_paper"
+var EndTime= new Date('Ianuary 26, 2023 07:59:59 GMT-00:00'); //截止时间
 var NowTime = new Date();
 var t =EndTime.getTime() - NowTime.getTime();
 if(Math.floor(t/1000) == 0){
