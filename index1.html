@@ -12,6 +12,8 @@
     .style5 { font-size: 100%; }
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
     img {
       max-width: 100%;
@@ -22,44 +24,70 @@
       margin: 0 auto;
       padding: 10px;
     }
+
+    /* Oxford Blue Navigation Bar */
+    #navigation-wrapper {
+      background-color: #002147;
+      padding: 10px 0;
+    }
+
     #navigation ul.tabbed {
       list-style: none;
       padding: 0;
+      margin: 0;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
+
     #navigation ul.tabbed li {
       display: inline;
     }
+
     #navigation ul.tabbed li a {
       text-decoration: none;
       padding: 8px 12px;
-      background: #eee;
+      background: transparent;
+      color: white;
       border-radius: 4px;
     }
+
+    #navigation ul.tabbed li a:hover {
+      background-color: #003366;
+      color: #fff;
+    }
+
+    #navigation ul.tabbed .current_page_item a {
+      background-color: #003366;
+      color: #fff;
+    }
+
     .col2 {
       width: 48%;
       display: inline-block;
       vertical-align: top;
       box-sizing: border-box;
     }
+
     .separator-vertical {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 20px;
     }
+
     @media (max-width: 768px) {
       .col2 {
         width: 100%;
       }
     }
+
     #footer-wrapper, #bottom {
       background: #f4f4f4;
       padding: 10px 0;
       text-align: center;
     }
+
     .clearer {
       clear: both;
     }
